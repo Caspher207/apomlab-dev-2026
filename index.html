@@ -32,8 +32,8 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
         .section-padding {
-            padding-top: 5rem;
-            padding-bottom: 5rem;
+            padding-top: 3.5rem;
+            padding-bottom: 3.5rem;
         }
         /* Dropdown styles */
         .dropdown {
@@ -93,6 +93,22 @@
         .dropdown:hover i {
             transform: rotate(180deg);
         }
+        .faq-category-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+            opacity: 0;
+        }
+        .faq-category-group.active .faq-category-content {
+            max-height: 2000px;
+            opacity: 1;
+            margin-top: 0.75rem;
+        }
+        .faq-category-group.active [data-lucide="chevron-down"],
+        .faq-category-group.active svg.lucide-chevron-down {
+            transform: rotate(180deg);
+            color: #2b6cb0;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans">
@@ -104,12 +120,13 @@
             <div class="flex gap-8">
                 <span>Singapore (HQ)</span>
                 <span>Malaysia</span>
+                <span>Philippines</span>
                 <span>Rwanda</span>
                 <span>Germany</span>
             </div>
         </div>
     </div>
-    <nav class="fixed top-0 w-full z-50 glass border-b border-slate-200">
+    <nav class="sticky top-0 w-full z-50 glass border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex-shrink-0 flex items-center">
@@ -121,25 +138,30 @@
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
                         <a href="#home" class="hover:text-secondary px-3 py-2 text-sm font-medium">Home</a>
-                        <button onclick="openReadinessCheck()" class="hover:text-secondary px-3 py-2 text-sm font-medium font-bold text-accent flex items-center gap-1.5 transition-colors">
+                        <a href="https://chatgpt.com/g/g-6985c596f3688191b63904a8df382163-ai-readiness-check-by-apo-mlab" target="_blank" rel="noopener noreferrer" class="hover:text-secondary px-3 py-2 text-sm font-medium font-bold text-accent flex items-center gap-1.5 transition-colors">
                             <span class="relative flex h-2 w-2">
                                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                                 <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
                             </span>
                             Readiness Check
-                        </button>
+                        </a>
                         <a href="#model" class="hover:text-secondary px-3 py-2 text-sm font-medium">Model</a>
-                        <div class="dropdown">
+                        <div class="dropdown group relative inline-block">
                             <button class="hover:text-secondary px-3 py-2 text-sm font-medium flex items-center gap-1.5 transition-colors">
                                 Deployments
-                                <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+                                <i data-lucide="chevron-down" class="w-3.5 h-3.5 transition-transform duration-300 group-hover:rotate-180"></i>
                             </button>
-                            <div class="dropdown-content">
-                                <a href="singapore.html">Singapore</a>
-                                <a href="malaysia.html">Malaysia</a>
-                                <a href="philippines.html">Philippines</a>
+                            <div class="dropdown-content absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-white border border-slate-200 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                                <div class="py-2">
+                                    <a href="singapore.html" class="block px-4 py-2 text-sm text-primary hover:bg-slate-50 hover:text-secondary transition-colors">Singapore</a>
+                                    <a href="malaysia.html" class="block px-4 py-2 text-sm text-primary hover:bg-slate-50 hover:text-secondary transition-colors">Malaysia</a>
+                                    <a href="philippines.html" class="block px-4 py-2 text-sm text-primary hover:bg-slate-50 hover:text-secondary transition-colors">Philippines</a>
+                                </div>
                             </div>
                         </div>
+                        <a href="#products" class="hover:text-secondary px-3 py-2 text-sm font-medium">Products</a>
+                        <a href="#training" class="hover:text-secondary px-3 py-2 text-sm font-medium">Training</a>
+                        <a href="#team" class="hover:text-secondary px-3 py-2 text-sm font-medium">Team</a>
                         <a href="#about" class="hover:text-secondary px-3 py-2 text-sm font-medium">About</a>
                         <a href="#contact" class="bg-primary text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-secondary transition-colors">Contact</a>
                     </div>
@@ -155,13 +177,13 @@
         <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-100">Home</a>
-                <button onclick="openReadinessCheck()" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-accent font-bold hover:bg-slate-100 flex items-center gap-2">
+                <a href="https://chatgpt.com/g/g-6985c596f3688191b63904a8df382163-ai-readiness-check-by-apo-mlab" target="_blank" rel="noopener noreferrer" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-accent font-bold hover:bg-slate-100 flex items-center gap-2">
                     <span class="relative flex h-2 w-2">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
                     </span>
                     Readiness Check
-                </button>
+                </a>
                 <a href="#model" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-100">Model</a>
                 <div class="space-y-1">
                     <div class="px-3 py-2 text-base font-bold text-primary uppercase tracking-widest bg-slate-50">Deployments</div>
@@ -171,6 +193,9 @@
                         <a href="philippines.html" class="block px-3 py-2 rounded-md text-sm font-bold text-slate-500 hover:bg-slate-100 uppercase tracking-wider transition-colors">Philippines</a>
                     </div>
                 </div>
+                <a href="#products" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-100">Products</a>
+                <a href="#training" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-100">Training</a>
+                <a href="#team" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-100">Team</a>
                 <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium hover:bg-slate-100">About</a>
                 <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium bg-primary text-white">Contact</a>
             </div>
@@ -178,56 +203,60 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-white">
+    <section id="home" class="relative pt-16 pb-12 md:pt-20 md:pb-16 overflow-hidden bg-white">
         <div class="absolute inset-0 z-0">
             <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(43,108,176,0.05),transparent_50%)]"></div>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center lg:text-left lg:flex lg:items-center">
                 <div class="lg:w-2/3">
-                    <a href="#readiness" class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-bold uppercase tracking-widest mb-6 animate-bounce hover:bg-accent/20 transition-colors">
+                    <a href="https://chatgpt.com/g/g-6985c596f3688191b63904a8df382163-ai-readiness-check-by-apo-mlab" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-[10px] font-bold uppercase tracking-widest mb-4 animate-bounce hover:bg-accent/20 transition-colors">
                         <span class="relative flex h-2 w-2">
                             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
                             <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
                         </span>
                         New: AI Readiness Check Available
                     </a>
-                    <h1 class="text-4xl md:text-7xl font-serif font-bold text-primary mb-8 leading-[1.1]">
+                    <h1 class="text-3xl md:text-5xl font-serif font-bold text-primary mb-4 leading-[1.1]">
                         HUMAN CAPABILITY INFRASTRUCTURE
                     </h1>
-                    <p class="text-xl md:text-2xl text-slate-600 mb-10 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed text-balance">
+                    <p class="text-base md:text-lg text-slate-600 mb-6 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed text-balance">
                         Systems that ensure people continue to work correctly as technology, workflows, and conditions change. <span class="font-bold text-primary italic">Not training but Infrastructure.</span>
                     </p>
 
-                    <div class="space-y-6 mb-12 max-w-2xl">
-                        <div class="flex gap-4 items-start text-lg">
-                            <div class="w-1.5 h-1.5 rounded-full bg-secondary mt-2.5 flex-shrink-0"></div>
-                            <p class="text-slate-600">AI tools are now part of daily work. They change faster than people can continuously relearn. Organizations respond with training, but new tools and workflows keep appearing. Over time, people fall out of sync.</p>
+                    <div class="space-y-3 mb-8 max-w-2xl">
+                        <div class="flex gap-3 items-start text-sm">
+                            <div class="w-1.5 h-1.5 rounded-full bg-secondary mt-2 flex-shrink-0"></div>
+                            <p class="text-slate-600">AI tools change faster than people can continuously relearn. Organizations respond with training, but people fall out of sync as new workflows appear.</p>
                         </div>
-                        <div class="flex gap-4 items-start text-lg">
-                            <div class="w-1.5 h-1.5 rounded-full bg-secondary mt-2.5 flex-shrink-0"></div>
-                            <p class="text-slate-600">Without clear ownership, capability drift becomes invisible. When many people manage change, accountability weakens and execution standards diverge.</p>
+                        <div class="flex gap-3 items-start text-sm">
+                            <div class="w-1.5 h-1.5 rounded-full bg-secondary mt-2 flex-shrink-0"></div>
+                            <p class="text-slate-600">Without clear ownership, capability drift becomes invisible. Accountability weakens and execution standards diverge.</p>
                         </div>
                     </div>
 
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <a href="#contact" onclick="document.getElementById('check-calibrate').checked = true" class="px-8 py-4 bg-secondary text-white rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-200/50 flex flex-col items-center justify-center text-center group">
-                            <span class="block text-lg">Calibrate Your Workforce</span>
-                            <span class="block text-xs opacity-80 font-normal mt-1">Baseline calibration only. No deployment commitment.</span>
+                    <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                        <a href="#contact" onclick="document.getElementById('check-calibrate').checked = true" class="px-6 py-3 bg-secondary text-white rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg flex flex-col items-center justify-center text-center group">
+                            <span class="block text-base">Calibrate Your Workforce</span>
+                            <span class="block text-[10px] opacity-80 font-normal mt-0.5">Baseline calibration only. No deployment commitment.</span>
                         </a>
-                        <a href="#contact" onclick="document.getElementById('check-deploy').checked = true" class="px-8 py-4 bg-white text-primary border-2 border-primary/10 rounded-xl font-bold hover:bg-slate-50 transition-all flex flex-col items-center justify-center text-center">
-                            <span class="block text-lg">Deploy HDOS</span>
-                            <span class="block text-xs text-slate-500 font-normal mt-1">(Human Capability Operating System)</span>
+                        <a href="#contact" onclick="document.getElementById('check-deploy').checked = true" class="px-6 py-3 bg-white text-primary border-2 border-primary/10 rounded-xl font-bold hover:bg-slate-50 transition-all flex flex-col items-center justify-center text-center">
+                            <span class="block text-base">Deploy HDOS</span>
+                            <span class="block text-[10px] text-slate-500 font-normal mt-0.5">(Human Capability Operating System)</span>
                         </a>
                     </div>
                 </div>
-                <div class="lg:w-1/3 mt-12 lg:mt-0 flex justify-center">
-                    <div class="relative w-64 h-64 md:w-80 md:h-80 lg:w-full max-w-sm">
-                        <div class="absolute -inset-4 border-2 border-secondary/20 rounded-full animate-[spin_20s_linear_infinite]"></div>
-                        <div class="absolute -inset-4 bg-secondary rounded-full blur-2xl opacity-10"></div>
+                <div class="lg:w-1/3 mt-8 lg:mt-0 flex flex-col items-center gap-4">
+                    <div class="relative w-56 h-56 md:w-64 md:h-64 lg:w-72 lg:h-72">
+                        <div class="absolute -inset-3 border-2 border-secondary/20 rounded-full animate-[spin_20s_linear_infinite]"></div>
+                        <div class="absolute -inset-3 bg-secondary rounded-full blur-xl opacity-10"></div>
                         <div class="relative h-full w-full bg-white rounded-full shadow-2xl border border-slate-100 overflow-hidden">
                             <img src="Gemini_Generated_Image_293lz5293lz5293l.png" alt="Gunther Hess" class="w-full h-full object-cover" style="object-position: center 15%;">
                         </div>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-base font-serif font-bold text-primary">Mr. Günther Erwin Hess</p>
+                        <p class="text-[10px] font-bold uppercase tracking-widest text-secondary mt-0.5">Co-Founder, Principal Architect — AI Covenant Systems</p>
                     </div>
                 </div>
             </div>
@@ -240,298 +269,134 @@
             <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,#ed8936,transparent_70%)]"></div>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center mb-16">
-                <div class="inline-block px-4 py-1.5 mb-6 text-[11px] font-black tracking-[0.2em] uppercase bg-accent text-white rounded-full shadow-lg animate-pulse">
-                    Sales Funnel Highlight
+            <div class="text-center mb-8">
+                <div class="inline-block px-3 py-1 mb-3 text-[10px] font-black tracking-[0.2em] uppercase bg-accent text-white rounded-full shadow-lg animate-pulse">
+                    Interactive Diagnostic
                 </div>
-                <h2 class="text-3xl md:text-6xl font-serif font-bold text-white mb-6 leading-tight">Is Your Organization Ready for AI?</h2>
-                <p class="text-xl md:text-2xl text-blue-100 mb-10 max-w-3xl mx-auto font-light leading-relaxed">
-                    Take our <span class="font-bold text-accent italic">2-minute diagnostic</span> powered by APO MLAB. Get instant clarity on your human capability infrastructure.
+                <h2 class="text-2xl md:text-4xl font-serif font-bold text-white mb-3 italic">Is Your Business Ready for AI?</h2>
+                <div class="w-16 h-1 bg-accent mx-auto"></div>
+            </div>
+
+            <div class="flex flex-col items-center text-center gap-6 mb-4">
+                <p class="text-lg md:text-xl text-blue-100 max-w-2xl font-light leading-relaxed">
+                    Take our <span class="font-bold text-accent italic">2-minute diagnostic</span>. Get instant clarity on your human capability infrastructure.
                 </p>
-                <button onclick="openReadinessCheck()" class="inline-flex items-center gap-4 px-12 py-6 bg-accent text-white rounded-2xl font-black text-xl hover:bg-orange-600 transition-all shadow-[0_0_50px_rgba(237,137,54,0.5)] hover:scale-105 active:scale-95 group">
-                    <i data-lucide="brain-circuit" class="w-8 h-8"></i>
-                    START INTERACTIVE CHECK
-                    <i data-lucide="sparkles" class="w-6 h-6 opacity-70 group-hover:rotate-12 transition-transform"></i>
-                </button>
-                <div class="mt-4">
-                    <a href="https://chatgpt.com/g/g-6985c596f3688191b63904a8df382163-ai-readiness-check-by-apo-mlab" target="_blank" rel="noopener noreferrer" class="text-blue-200 text-sm hover:text-white underline decoration-accent/30">Or use our ChatGPT Version</a>
-                </div>
+                <a href="https://chatgpt.com/g/g-6985c596f3688191b63904a8df382163-ai-readiness-check-by-apo-mlab" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 px-10 py-4 bg-accent text-white rounded-2xl font-black text-lg hover:bg-orange-600 transition-all shadow-[0_0_30px_rgba(237,137,54,0.4)] hover:scale-105 active:scale-95 group">
+                    <i data-lucide="brain-circuit" class="w-6 h-6"></i>
+                    START CHECK
+                    <i data-lucide="sparkles" class="w-5 h-5 opacity-70 group-hover:rotate-12 transition-transform"></i>
+                </a>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8 text-left max-w-5xl mx-auto mt-20">
-                <div class="bg-white/5 p-8 rounded-[2rem] border border-white/10 hover:bg-white/10 transition-colors">
-                    <div class="w-12 h-12 bg-accent rounded-xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="zap" class="w-6 h-6"></i></div>
-                    <h4 class="text-xl font-bold text-white mb-3">Instant Audit</h4>
-                    <p class="text-blue-100/70 leading-relaxed">Understand your current capability gaps and execution risks in real-time.</p>
+            <div class="grid md:grid-cols-3 gap-6 text-left max-w-5xl mx-auto mt-12">
+                <div class="bg-white/5 p-6 rounded-[2rem] border border-white/10 hover:bg-white/10 transition-colors">
+                    <div class="w-10 h-10 bg-accent rounded-xl flex items-center justify-center text-white mb-4 shadow-lg"><i data-lucide="zap" class="w-5 h-5"></i></div>
+                    <h4 class="text-lg font-bold text-white mb-2">Instant Audit</h4>
+                    <p class="text-blue-100/70 text-sm leading-relaxed">Understand your current capability gaps and execution risks in real-time.</p>
                 </div>
-                <div class="bg-white/5 p-8 rounded-[2rem] border border-white/10 hover:bg-white/10 transition-colors">
-                    <div class="w-12 h-12 bg-accent rounded-xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="target" class="w-6 h-6"></i></div>
-                    <h4 class="text-xl font-bold text-white mb-3">Strategic Path</h4>
-                    <p class="text-blue-100/70 leading-relaxed">Identify where to deploy AI first for the highest operational ROI.</p>
+                <div class="bg-white/5 p-6 rounded-[2rem] border border-white/10 hover:bg-white/10 transition-colors">
+                    <div class="w-10 h-10 bg-accent rounded-xl flex items-center justify-center text-white mb-4 shadow-lg"><i data-lucide="target" class="w-5 h-5"></i></div>
+                    <h4 class="text-lg font-bold text-white mb-2">Strategic Path</h4>
+                    <p class="text-blue-100/70 text-sm leading-relaxed">Identify where to deploy AI first for the highest operational ROI.</p>
                 </div>
-                <div class="bg-white/5 p-8 rounded-[2rem] border border-white/10 hover:bg-white/10 transition-colors">
-                    <div class="w-12 h-12 bg-accent rounded-xl flex items-center justify-center text-white mb-6 shadow-lg"><i data-lucide="shield-check" class="w-6 h-6"></i></div>
-                    <h4 class="text-xl font-bold text-white mb-3">Risk Mitigation</h4>
-                    <p class="text-blue-100/70 leading-relaxed">Prevent invisible capability decay before it impacts your performance.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="shift" class="section-padding bg-slate-50 border-y border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div>
-                    <h2 class="text-xl font-bold text-secondary uppercase tracking-[0.3em] mb-4">The Shift</h2>
-                    <h3 class="text-3xl md:text-5xl font-serif font-bold text-primary mb-8 leading-tight">Transformation fails after implementation.</h3>
-                    <div class="space-y-6 text-lg text-slate-600 leading-relaxed">
-                        <p>Organizations invest heavily in new systems, tools, and AI. Initial performance improves.</p>
-                        <p class="font-semibold text-primary p-4 bg-white rounded-xl shadow-sm border-l-4 border-secondary">Over time, people adapt differently, shortcuts emerge, and workarounds replace standards.</p>
-                        <p>The gap between how work is designed and how it is actually done quietly grows.</p>
-                        <p class="text-2xl font-serif italic text-secondary pt-4">APO exists to close this gap through capability governance, not ad-hoc fixes.</p>
-                    </div>
-                </div>
-                <div class="relative">
-                    <div class="aspect-square bg-white p-12 rounded-[2rem] shadow-2xl border border-slate-100 flex flex-col justify-center">
-                        <div class="space-y-10">
-                            <div class="flex items-center gap-6 group">
-                                <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors"><i data-lucide="trending-up" class="w-7 h-7"></i></div>
-                                <div><h4 class="text-xl font-bold text-primary">Initial Investment</h4><p class="text-slate-500">Systems, Tools, AI adoption</p></div>
-                            </div>
-                            <div class="flex items-center gap-6 group">
-                                <div class="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-colors"><i data-lucide="trending-down" class="w-7 h-7"></i></div>
-                                <div><h4 class="text-xl font-bold text-primary">Natural Decay</h4><p class="text-slate-500">Workarounds & Alignment Gap</p></div>
-                            </div>
-                            <div class="flex items-center gap-6 group">
-                                <div class="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-white transition-colors"><i data-lucide="shield-check" class="w-7 h-7"></i></div>
-                                <div><h4 class="text-xl font-bold text-primary">APO Governance</h4><p class="text-slate-500">Continuous Calibration</p></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 2: Capability Decay -->
-    <section id="decay" class="section-padding bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-20">
-                <h2 class="text-xl font-bold text-secondary uppercase tracking-[0.3em] mb-4">Why 90 Days</h2>
-                <h3 class="text-3xl md:text-5xl font-serif font-bold text-primary mb-6 text-balance">Why capability degrades over time?</h3>
-                <p class="text-2xl text-slate-600 max-w-3xl mx-auto italic font-light">Capability decay is gradual and often invisible.</p>
-                <p class="text-xl text-slate-500 mt-6 max-w-2xl mx-auto">It emerges as systems, tools, and workflows change faster than habits adjust.</p>
-                <div class="mt-12 inline-block px-8 py-3 bg-primary text-white rounded-full font-black uppercase tracking-[0.2em] shadow-xl border-2 border-secondary/30">3 - Level Decay Model</div>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8 mb-20">
-                <div class="p-10 rounded-[2rem] bg-slate-50 border border-slate-100 hover:shadow-xl transition-all">
-                    <div class="text-5xl font-serif font-bold text-slate-200 mb-6">01</div>
-                    <h3 class="text-xl font-bold text-primary mb-4 uppercase tracking-wider">Level 1 — Tool Decay</h3>
-                    <p class="text-slate-600 text-lg leading-relaxed">Interfaces and features change regularly. Execution slows as people hesitate or rely on memory.</p>
-                </div>
-                <div class="p-10 rounded-[2rem] bg-slate-50 border border-slate-100 hover:shadow-xl transition-all">
-                    <div class="text-5xl font-serif font-bold text-slate-200 mb-6">02</div>
-                    <h3 class="text-xl font-bold text-primary mb-4 uppercase tracking-wider">Level 2 — Workflow Decay</h3>
-                    <p class="text-slate-600 text-lg leading-relaxed">Workarounds replace standard processes. Teams execute differently while believing they are aligned.</p>
-                </div>
-                <div class="p-10 rounded-[2rem] bg-slate-50 border border-slate-100 hover:shadow-xl transition-all">
-                    <div class="text-5xl font-serif font-bold text-slate-200 mb-6">03</div>
-                    <h3 class="text-xl font-bold text-primary mb-4 uppercase tracking-wider">Level 3 — Capability Decay</h3>
-                    <p class="text-slate-600 text-lg leading-relaxed">Old habits return. Outcomes become inconsistent and accountability weakens.</p>
-                </div>
-            </div>
-
-            <div class="p-12 bg-primary rounded-[2.5rem] text-white text-center shadow-2xl relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-                <h4 class="text-3xl font-serif font-bold mb-6">Governance Principle:</h4>
-                <p class="text-2xl text-blue-100 max-w-4xl mx-auto leading-relaxed">A 90-day cadence allows organizations to detect drift early, correct execution, and verify alignment before problems scale.</p>
-                <div class="mt-8 inline-block px-6 py-2 border-2 border-secondary rounded-full text-sm font-black uppercase tracking-[0.2em] text-white bg-secondary shadow-[0_0_20px_rgba(59,130,246,0.5)]">This is a governance rhythm, not a training cycle.</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 3: Products -->
-    <section id="products-preview" class="section-padding bg-slate-50 border-y border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-20">
-                <h2 class="text-xl font-bold text-secondary uppercase tracking-[0.3em] mb-4">Products</h2>
-                <h3 class="text-3xl md:text-5xl font-serif font-bold text-primary mb-6 italic text-balance text-center">Execution Readiness Systems</h3>
-            </div>
-
-            <div class="grid lg:grid-cols-2 gap-12">
-                <div class="bg-white p-12 rounded-[2.5rem] shadow-xl border border-slate-100 flex flex-col h-full hover:shadow-2xl transition-all">
-                    <div class="flex-grow">
-                        <div class="w-20 h-20 bg-blue-50 rounded-[1.5rem] flex items-center justify-center text-primary mb-10"><i data-lucide="users-2" class="w-10 h-10"></i></div>
-                        <h3 class="text-3xl font-serif font-bold text-primary mb-4">Operator Calibration</h3>
-                        <p class="text-slate-500 mb-8 font-bold uppercase tracking-widest text-sm">SMEs & Professional Teams</p>
-                        <ul class="space-y-6 text-lg text-slate-600 mb-10">
-                            <li class="flex gap-4 items-start"><i data-lucide="check-circle-2" class="w-6 h-6 text-secondary flex-shrink-0 mt-1"></i> <span>Structured audits, targeted corrections, and verification cycles for individuals and small teams.</span></li>
-                            <li class="flex gap-4 items-start"><i data-lucide="check-circle-2" class="w-6 h-6 text-secondary flex-shrink-0 mt-1"></i> <span>Establishes a baseline, corrects real execution gaps, and verifies readiness on a defined cadence.</span></li>
-                        </ul>
-                    </div>
-                    <a href="#contact" class="inline-flex items-center justify-center px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-secondary transition-all shadow-lg">Calibrate Your Workforce</a>
-                </div>
-
-                <div class="bg-primary p-12 rounded-[2.5rem] shadow-xl flex flex-col h-full text-white hover:shadow-2xl transition-all relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-secondary/30"></div>
-                    <div class="flex-grow text-center">
-                        <div class="w-20 h-20 bg-white/10 rounded-[1.5rem] flex items-center justify-center mb-10 mx-auto text-secondary"><i data-lucide="layers" class="w-10 h-10"></i></div>
-                        <h3 class="text-3xl font-serif font-bold mb-4">Enterprise HDOS</h3>
-                        <p class="text-blue-200 mb-8 font-bold uppercase tracking-widest text-sm">Governments & Large Organizations</p>
-                        <ul class="space-y-6 text-lg text-blue-100 mb-10 text-left">
-                            <li class="flex gap-4 items-start"><i data-lucide="check-circle-2" class="w-6 h-6 text-secondary flex-shrink-0 mt-1"></i> <span>Human Capability Operating System governing capability at scale.</span></li>
-                            <li class="flex gap-4 items-start"><i data-lucide="check-circle-2" class="w-6 h-6 text-secondary flex-shrink-0 mt-1"></i> <span>Runs continuous cycles of detection, calibration, verification, and synchronization.</span></li>
-                        </ul>
-                    </div>
-                    <a href="#contact" class="inline-flex items-center justify-center px-8 py-4 bg-white text-primary font-bold rounded-xl hover:bg-blue-50 transition-all shadow-lg">Deploy HDOS</a>
-                </div>
-            </div>
-
-            <div class="mt-20 text-center max-w-3xl mx-auto">
-                <p class="text-2xl text-slate-600 italic font-serif leading-relaxed">"Calibration corrects drift. Certification verifies that capability has been restored and remains current."</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section 4: Proof & Deployments -->
-    <section id="proof-preview" class="section-padding bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-20">
-                <h2 class="text-xl font-bold text-secondary uppercase tracking-[0.3em] mb-4">Proof & Deployments</h2>
-                <h3 class="text-3xl md:text-5xl font-serif font-bold text-primary mb-10 italic">Real-World Execution</h3>
-                <p class="text-2xl text-slate-600 max-w-3xl mx-auto font-light mb-8">APO governance models are operating in real organizational conditions, not ideal scenarios.</p>
-                <div class="w-24 h-1 bg-secondary mx-auto"></div>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-10 mb-20">
-                <div class="group relative overflow-hidden rounded-[2rem] shadow-2xl h-96">
-                    <img src="https://images.unsplash.com/photo-1525498128493-380d1990a112?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/20 to-transparent flex flex-col justify-end p-10 text-white">
-                        <h4 class="text-2xl font-bold mb-3">Singapore</h4>
-                        <p class="text-blue-100 font-medium">HQ and architecture</p>
-                    </div>
-                </div>
-                <div class="group relative overflow-hidden rounded-[2rem] shadow-2xl h-96">
-                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/20 to-transparent flex flex-col justify-end p-10 text-white">
-                        <h4 class="text-2xl font-bold mb-3">Malaysia</h4>
-                        <p class="text-blue-100 font-medium">JS-SEZ capability governance</p>
-                    </div>
-                </div>
-                <div class="group relative overflow-hidden rounded-[2rem] shadow-2xl h-96">
-                    <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/20 to-transparent flex flex-col justify-end p-10 text-white">
-                        <h4 class="text-2xl font-bold mb-3">Rwanda</h4>
-                        <p class="text-blue-100 font-medium">Workforce calibration pilots</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center p-16 bg-slate-900 rounded-[3rem] shadow-2xl">
-                <h4 class="text-white text-2xl font-serif mb-8">Access our regional operational hubs</h4>
-                <div class="flex flex-wrap justify-center gap-6">
-                    <a href="singapore.html" class="inline-flex items-center justify-center px-8 py-4 bg-primary text-white font-bold rounded-xl shadow-xl hover:bg-secondary transition-all hover:scale-105 active:scale-95">
-                        Singapore HQ <i data-lucide="building-2" class="ml-2 w-5 h-5"></i>
-                    </a>
-                    <a href="malaysia.html" class="inline-flex items-center justify-center px-8 py-4 bg-primary text-white font-bold rounded-xl shadow-xl hover:bg-secondary transition-all hover:scale-105 active:scale-95">
-                        Malaysia <i data-lucide="network" class="ml-2 w-5 h-5"></i>
-                    </a>
-                    <a href="philippines.html" class="inline-flex items-center justify-center px-8 py-4 bg-primary text-white font-bold rounded-xl shadow-xl hover:bg-secondary transition-all hover:scale-105 active:scale-95">
-                        Philippines <i data-lucide="zap" class="ml-2 w-5 h-5"></i>
-                    </a>
+                <div class="bg-white/5 p-6 rounded-[2rem] border border-white/10 hover:bg-white/10 transition-colors">
+                    <div class="w-10 h-10 bg-accent rounded-xl flex items-center justify-center text-white mb-4 shadow-lg"><i data-lucide="shield-check" class="w-5 h-5"></i></div>
+                    <h4 class="text-lg font-bold text-white mb-2">Risk Mitigation</h4>
+                    <p class="text-blue-100/70 text-sm leading-relaxed">Detect drift before it scales and ensure compliance standards are met.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Model Section -->
+    <!-- Model Section -->
     <section id="model" class="section-padding bg-slate-50 border-y border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-20">
-                <h2 class="text-xl font-bold text-secondary uppercase tracking-[0.3em] mb-4">Model</h2>
-                <h3 class="text-3xl md:text-5xl font-serif font-bold text-primary mb-6">Human Capability Governance Framework</h3>
-                <p class="text-xl text-slate-600 max-w-3xl mx-auto">This page explains how APO MLAB governs capability as a system, not a service.</p>
+            <div class="text-center mb-10">
+                <h2 class="text-xl font-bold text-secondary uppercase tracking-[0.3em] mb-2">Model</h2>
+                <h3 class="text-2xl md:text-4xl font-serif font-bold text-primary mb-3">Human Capability Governance Framework</h3>
+                <p class="text-base text-slate-600 max-w-3xl mx-auto">Governing capability as a system, not a service.</p>
             </div>
 
             <!-- Core Operating Logic -->
-            <div class="mb-20">
-                <div class="bg-primary p-8 md:p-12 rounded-[2.5rem] shadow-2xl relative overflow-hidden text-center">
-                    <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-                    <h4 class="text-white text-sm font-bold uppercase tracking-[0.2em] mb-12 opacity-80">Core Operating Logic</h4>
-                    <div class="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-4 relative z-10">
+            <div class="mb-10">
+                <div class="bg-primary p-6 md:p-8 rounded-[2.5rem] shadow-2xl relative overflow-hidden text-center">
+                    <div class="absolute top-0 right-0 w-48 h-48 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                    <h4 class="text-white text-[10px] font-bold uppercase tracking-[0.2em] mb-6 opacity-80">Core Operating Logic</h4>
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-2 relative z-10">
                         <div class="flex flex-col items-center group flex-1">
-                            <div class="w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center text-white mb-4 group-hover:bg-secondary transition-all group-hover:scale-110"><i data-lucide="search" class="w-10 h-10"></i></div>
-                            <span class="text-white font-bold text-lg tracking-wider">Detection</span>
+                            <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-white mb-3 group-hover:bg-secondary transition-all group-hover:scale-110"><i data-lucide="search" class="w-8 h-8"></i></div>
+                            <span class="text-white font-bold text-base tracking-wider">Detection</span>
                         </div>
-                        <div class="hidden md:block text-secondary opacity-50"><i data-lucide="chevron-right" class="w-8 h-8"></i></div>
+                        <div class="hidden md:block text-secondary opacity-50"><i data-lucide="chevron-right" class="w-6 h-6"></i></div>
                         <div class="flex flex-col items-center group flex-1">
-                            <div class="w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center text-white mb-4 group-hover:bg-secondary transition-all group-hover:scale-110"><i data-lucide="sliders" class="w-10 h-10"></i></div>
-                            <span class="text-white font-bold text-lg tracking-wider">Calibration</span>
+                            <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-white mb-3 group-hover:bg-secondary transition-all group-hover:scale-110"><i data-lucide="sliders" class="w-8 h-8"></i></div>
+                            <span class="text-white font-bold text-base tracking-wider">Calibration</span>
                         </div>
-                        <div class="hidden md:block text-secondary opacity-50"><i data-lucide="chevron-right" class="w-8 h-8"></i></div>
+                        <div class="hidden md:block text-secondary opacity-50"><i data-lucide="chevron-right" class="w-6 h-6"></i></div>
                         <div class="flex flex-col items-center group flex-1">
-                            <div class="w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center text-white mb-4 group-hover:bg-secondary transition-all group-hover:scale-110"><i data-lucide="user-check" class="w-10 h-10"></i></div>
-                            <span class="text-white font-bold text-lg tracking-wider">Verification</span>
+                            <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-white mb-3 group-hover:bg-secondary transition-all group-hover:scale-110"><i data-lucide="user-check" class="w-8 h-8"></i></div>
+                            <span class="text-white font-bold text-base tracking-wider">Verification</span>
                         </div>
-                        <div class="hidden md:block text-secondary opacity-50"><i data-lucide="chevron-right" class="w-8 h-8"></i></div>
+                        <div class="hidden md:block text-secondary opacity-50"><i data-lucide="chevron-right" class="w-6 h-6"></i></div>
                         <div class="flex flex-col items-center group flex-1">
-                            <div class="w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center text-white mb-4 group-hover:bg-secondary transition-all group-hover:scale-110"><i data-lucide="refresh-cw" class="w-10 h-10"></i></div>
-                            <span class="text-white font-bold text-lg tracking-wider">Synchronization</span>
+                            <div class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center text-white mb-3 group-hover:bg-secondary transition-all group-hover:scale-110"><i data-lucide="refresh-cw" class="w-8 h-8"></i></div>
+                            <span class="text-white font-bold text-base tracking-wider">Synchronization</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="grid lg:grid-cols-2 gap-12 items-start">
+            <div class="grid lg:grid-cols-2 gap-8 items-start">
                 <!-- HDOS Section -->
-                <div class="bg-white p-10 rounded-[2rem] shadow-xl border border-slate-100 h-full">
-                    <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-primary mb-8"><i data-lucide="layers" class="w-8 h-8"></i></div>
-                    <h4 class="text-2xl font-serif font-bold text-primary mb-4">HDOS — Human Capability Operating System</h4>
-                    <p class="text-slate-600 mb-8 leading-relaxed">HDOS governs workforce capability at scale through continuous governance cycles.</p>
-                    <div class="space-y-4">
-                        <p class="font-bold text-primary mb-2 italic">It ensures:</p>
-                        <ul class="space-y-4 text-slate-600">
-                            <li class="flex gap-3 items-start"><i data-lucide="check-circle-2" class="w-5 h-5 text-secondary flex-shrink-0 mt-1"></i> <span>Capability remains aligned with tools and systems</span></li>
-                            <li class="flex gap-3 items-start"><i data-lucide="check-circle-2" class="w-5 h-5 text-secondary flex-shrink-0 mt-1"></i> <span>Accountability remains clear</span></li>
-                            <li class="flex gap-3 items-start"><i data-lucide="check-circle-2" class="w-5 h-5 text-secondary flex-shrink-0 mt-1"></i> <span>Execution standards remain consistent</span></li>
+                <div class="bg-white p-8 rounded-[2rem] shadow-xl border border-slate-100 h-full">
+                    <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-primary mb-6"><i data-lucide="layers" class="w-6 h-6"></i></div>
+                    <h4 class="text-xl font-serif font-bold text-primary mb-3">HDOS — Human Capability Operating System</h4>
+                    <p class="text-slate-600 mb-6 leading-relaxed text-sm">HDOS governs workforce capability at scale through continuous governance cycles.</p>
+                    <div class="space-y-3">
+                        <p class="font-bold text-primary mb-1 italic text-xs">It ensures:</p>
+                        <ul class="space-y-3 text-slate-600 text-sm">
+                            <li class="flex gap-2 items-start"><i data-lucide="check-circle-2" class="w-4 h-4 text-secondary flex-shrink-0 mt-0.5"></i> <span>Capability aligned with tools and systems</span></li>
+                            <li class="flex gap-2 items-start"><i data-lucide="check-circle-2" class="w-4 h-4 text-secondary flex-shrink-0 mt-0.5"></i> <span>Accountability remains clear</span></li>
+                            <li class="flex gap-2 items-start"><i data-lucide="check-circle-2" class="w-4 h-4 text-secondary flex-shrink-0 mt-0.5"></i> <span>Execution standards remain consistent</span></li>
                         </ul>
                     </div>
                 </div>
 
                 <!-- 90-Day Rhythm -->
-                <div class="bg-white p-10 rounded-[2rem] shadow-xl border border-slate-100 h-full relative overflow-hidden">
-                    <div class="absolute top-0 right-0 p-4"><span class="bg-secondary/10 text-secondary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">90-Day Cycle</span></div>
-                    <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-primary mb-8"><i data-lucide="calendar" class="w-8 h-8"></i></div>
-                    <h4 class="text-2xl font-serif font-bold text-primary mb-4">90-Day Governance Rhythm</h4>
-                    <p class="text-slate-600 mb-8 leading-relaxed">This prevents invisible degradation of performance and accountability.</p>
-                    <div class="grid grid-cols-2 gap-4 text-center">
-                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 hover:border-secondary/30 transition-colors flex flex-col items-center justify-center h-24"><span class="block font-bold text-primary mb-1 text-lg">Detect</span><span class="text-xs text-slate-500 uppercase tracking-widest">drift</span></div>
-                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 hover:border-secondary/30 transition-colors flex flex-col items-center justify-center h-24"><span class="block font-bold text-primary mb-1 text-lg">Calibrate</span><span class="text-xs text-slate-500 uppercase tracking-widest">execution</span></div>
-                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 hover:border-secondary/30 transition-colors flex flex-col items-center justify-center h-24"><span class="block font-bold text-primary mb-1 text-lg">Verify</span><span class="text-xs text-slate-500 uppercase tracking-widest">applied capability</span></div>
-                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 hover:border-secondary/30 transition-colors flex flex-col items-center justify-center h-24"><span class="block font-bold text-primary mb-1 text-lg text-balance">Synchronize</span><span class="text-[10px] text-slate-500 uppercase tracking-widest leading-tight">across teams and departments</span></div>
+                <div class="bg-white p-8 rounded-[2rem] shadow-xl border border-slate-100 h-full relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4"><span class="bg-secondary/10 text-secondary text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-widest">90-Day Cycle</span></div>
+                    <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-primary mb-6"><i data-lucide="calendar" class="w-6 h-6"></i></div>
+                    <h4 class="text-xl font-serif font-bold text-primary mb-3">90-Day Governance Rhythm</h4>
+                    <p class="text-slate-600 mb-6 leading-relaxed text-sm">This prevents invisible degradation of performance and accountability.</p>
+                    <div class="grid grid-cols-2 gap-3 text-center">
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 hover:border-secondary/30 transition-colors flex flex-col items-center justify-center h-20"><span class="block font-bold text-primary mb-0.5 text-base">Detect</span><span class="text-[9px] text-slate-500 uppercase tracking-widest">drift</span></div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 hover:border-secondary/30 transition-colors flex flex-col items-center justify-center h-20"><span class="block font-bold text-primary mb-0.5 text-base">Calibrate</span><span class="text-[9px] text-slate-500 uppercase tracking-widest">execution</span></div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 hover:border-secondary/30 transition-colors flex flex-col items-center justify-center h-20"><span class="block font-bold text-primary mb-0.5 text-base">Verify</span><span class="text-[9px] text-slate-500 uppercase tracking-widest">capability</span></div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100 hover:border-secondary/30 transition-colors flex flex-col items-center justify-center h-20"><span class="block font-bold text-primary mb-0.5 text-base leading-tight">Sync</span><span class="text-[8px] text-slate-500 uppercase tracking-widest leading-tight">across teams</span></div>
                     </div>
                 </div>
             </div>
 
             <!-- Certification Philosophy -->
-            <div class="mt-20 max-w-4xl mx-auto">
-                <div class="bg-slate-900 text-white p-12 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
-                    <div class="absolute bottom-0 left-0 w-64 h-64 bg-secondary/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+            <div class="mt-12 max-w-4xl mx-auto">
+                <div class="bg-slate-900 text-white p-8 md:p-10 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
+                    <div class="absolute bottom-0 left-0 w-48 h-48 bg-secondary/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
                     <div class="text-center relative z-10">
-                        <div class="inline-block px-4 py-1.5 mb-6 text-[11px] font-black tracking-[0.2em] uppercase bg-secondary text-white rounded-full border-2 border-secondary shadow-[0_0_15px_rgba(59,130,246,0.4)]">Certification Philosophy</div>
-                        <h4 class="text-3xl md:text-4xl font-serif font-bold mb-8">Certification verifies applied capability, not attendance.</h4>
-                        <div class="grid md:grid-cols-3 gap-8">
+                        <div class="inline-block px-3 py-1 mb-4 text-[10px] font-black tracking-[0.2em] uppercase bg-secondary text-white rounded-full">Certification Philosophy</div>
+                        <h4 class="text-xl md:text-2xl font-serif font-bold mb-6">Certification verifies applied capability, not attendance.</h4>
+                        <div class="grid md:grid-cols-3 gap-6">
                             <div class="flex flex-col items-center">
-                                <div class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center mb-4 text-secondary"><i data-lucide="target" class="w-6 h-6"></i></div>
-                                <span class="font-bold tracking-wider uppercase text-xs">Outcome-based</span>
+                                <div class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center mb-3 text-secondary"><i data-lucide="target" class="w-5 h-5"></i></div>
+                                <span class="font-bold tracking-wider uppercase text-[10px]">Outcome-based</span>
                             </div>
                             <div class="flex flex-col items-center">
-                                <div class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center mb-4 text-secondary"><i data-lucide="clock" class="w-6 h-6"></i></div>
-                                <span class="font-bold tracking-wider uppercase text-xs">Time-bound</span>
+                                <div class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center mb-3 text-secondary"><i data-lucide="clock" class="w-5 h-5"></i></div>
+                                <span class="font-bold tracking-wider uppercase text-[10px]">Time-bound</span>
                             </div>
                             <div class="flex flex-col items-center">
-                                <div class="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center mb-4 text-secondary"><i data-lucide="link" class="w-6 h-6"></i></div>
-                                <span class="font-bold tracking-wider uppercase text-xs">Linked to Governance</span>
+                                <div class="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center mb-3 text-secondary"><i data-lucide="link" class="w-5 h-5"></i></div>
+                                <span class="font-bold tracking-wider uppercase text-[10px]">Linked to Governance</span>
                             </div>
                         </div>
                     </div>
@@ -543,51 +408,51 @@
     <!-- Roles Section -->
     <section id="roles" class="section-padding bg-white border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-20">
-                <h2 class="text-xl font-bold text-secondary uppercase tracking-[0.3em] mb-4">Roles</h2>
-                <h3 class="text-3xl md:text-5xl font-serif font-bold text-primary mb-6">Governance Structure</h3>
-                <p class="text-xl text-slate-600 max-w-3xl mx-auto">Clear accountability ensures capability does not drift.</p>
+            <div class="text-center mb-10">
+                <h2 class="text-xl font-bold text-secondary uppercase tracking-[0.3em] mb-2">Roles</h2>
+                <h3 class="text-2xl md:text-4xl font-serif font-bold text-primary mb-3">Governance Structure</h3>
+                <p class="text-base text-slate-600 max-w-3xl mx-auto">Clear accountability ensures capability does not drift.</p>
             </div>
 
-            <div class="grid lg:grid-cols-3 gap-12">
+            <div class="grid lg:grid-cols-3 gap-8">
                 <!-- AICGO Role Main Card -->
-                <div class="lg:col-span-2 bg-slate-50 p-10 md:p-12 rounded-[2.5rem] border border-slate-100 shadow-xl relative overflow-hidden">
-                    <div class="absolute top-0 right-0 p-8 opacity-10"><i data-lucide="shield-check" class="w-32 h-32"></i></div>
+                <div class="lg:col-span-2 bg-slate-50 p-8 rounded-[2.5rem] border border-slate-100 shadow-xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-8 opacity-10"><i data-lucide="shield-check" class="w-24 h-24"></i></div>
                     
                     <div class="relative z-10">
-                        <div class="inline-block px-4 py-1.5 mb-6 text-[11px] font-bold tracking-widest uppercase bg-primary text-white rounded-full">Primary Accountable Role</div>
-                        <h4 class="text-3xl font-serif font-bold text-primary mb-6">AI Capability Governance Officer (AICGO)</h4>
-                        <p class="text-xl text-slate-700 mb-10 leading-relaxed font-medium">The single accountable role responsible for ensuring workforce capability remains aligned as AI-driven change continues.</p>
+                        <div class="inline-block px-3 py-1 mb-4 text-[10px] font-bold tracking-widest uppercase bg-primary text-white rounded-full">Primary Accountable Role</div>
+                        <h4 class="text-2xl font-serif font-bold text-primary mb-3">AI Capability Governance Officer (AICGO)</h4>
+                        <p class="text-base text-slate-700 mb-6 leading-relaxed font-medium">Single accountable role for ensuring workforce capability remains aligned as AI-driven change continues.</p>
                         
-                        <div class="grid md:grid-cols-2 gap-12">
+                        <div class="grid md:grid-cols-2 gap-8">
                             <div>
-                                <h5 class="text-sm font-bold uppercase tracking-widest text-secondary mb-6 flex items-center gap-2">
-                                    <i data-lucide="list-checks" class="w-5 h-5"></i> Responsibilities
+                                <h5 class="text-xs font-bold uppercase tracking-widest text-secondary mb-4 flex items-center gap-2">
+                                    <i data-lucide="list-checks" class="w-4 h-4"></i> Responsibilities
                                 </h5>
-                                <ul class="space-y-4">
-                                    <li class="flex items-start gap-3 text-slate-600">
-                                        <div class="w-1.5 h-1.5 rounded-full bg-secondary mt-2 flex-shrink-0"></div>
+                                <ul class="space-y-2 text-sm text-slate-600">
+                                    <li class="flex items-start gap-2">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-secondary mt-1.5 flex-shrink-0"></div>
                                         <span>Governs calibration cycles</span>
                                     </li>
-                                    <li class="flex items-start gap-3 text-slate-600">
-                                        <div class="w-1.5 h-1.5 rounded-full bg-secondary mt-2 flex-shrink-0"></div>
+                                    <li class="flex items-start gap-2">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-secondary mt-1.5 flex-shrink-0"></div>
                                         <span>Oversees HDOS operations</span>
                                     </li>
-                                    <li class="flex items-start gap-3 text-slate-600">
-                                        <div class="w-1.5 h-1.5 rounded-full bg-secondary mt-2 flex-shrink-0"></div>
+                                    <li class="flex items-start gap-2">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-secondary mt-1.5 flex-shrink-0"></div>
                                         <span>Owns verification outcomes</span>
                                     </li>
                                 </ul>
                             </div>
-                            <div class="bg-white p-8 rounded-2xl border border-slate-100 shadow-sm">
-                                <h5 class="text-sm font-bold uppercase tracking-widest text-primary mb-4">Positioning</h5>
-                                <p class="text-slate-600 mb-6 italic">"Mirrors regulatory roles such as the Data Protection Officer under PDPA."</p>
-                                <div class="space-y-3">
-                                    <div class="flex items-center gap-3 text-red-600 font-bold text-sm">
-                                        <i data-lucide="x-circle" class="w-4 h-4"></i> AI expertise is not required.
+                            <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm">
+                                <h5 class="text-[10px] font-bold uppercase tracking-widest text-primary mb-3">Positioning</h5>
+                                <p class="text-slate-600 mb-4 italic text-xs">"Mirrors regulatory roles such as the Data Protection Officer."</p>
+                                <div class="space-y-2">
+                                    <div class="flex items-center gap-2 text-red-600 font-bold text-[10px]">
+                                        <i data-lucide="x-circle" class="w-3 h-3"></i> AI expertise not required.
                                     </div>
-                                    <div class="flex items-center gap-3 text-green-600 font-bold text-sm">
-                                        <i data-lucide="check-circle" class="w-4 h-4"></i> Governance ownership is required.
+                                    <div class="flex items-center gap-2 text-green-600 font-bold text-[10px]">
+                                        <i data-lucide="check-circle" class="w-3 h-3"></i> Governance ownership required.
                                     </div>
                                 </div>
                             </div>
@@ -596,51 +461,45 @@
                 </div>
 
                 <!-- Supporting Roles -->
-                <div class="space-y-6">
-                    <h4 class="text-sm font-bold uppercase tracking-[0.2em] text-slate-400 mb-8 px-2">Supporting Roles</h4>
-                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4 hover:border-secondary/30 transition-colors">
-                        <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-primary"><i data-lucide="settings-2" class="w-6 h-6"></i></div>
-                        <span class="font-bold text-primary">Workflow Owners</span>
+                <div class="space-y-3">
+                    <h4 class="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mb-4 px-2">Supporting Roles</h4>
+                    <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm flex items-center gap-3 hover:border-secondary/30 transition-colors">
+                        <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center text-primary"><i data-lucide="settings-2" class="w-4 h-4"></i></div>
+                        <span class="font-bold text-primary text-xs uppercase tracking-wider">Workflow Owners</span>
                     </div>
-                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4 hover:border-secondary/30 transition-colors">
-                        <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-primary"><i data-lucide="clipboard-check" class="w-6 h-6"></i></div>
-                        <span class="font-bold text-primary">Calibration Administrators</span>
+                    <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm flex items-center gap-3 hover:border-secondary/30 transition-colors">
+                        <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center text-primary"><i data-lucide="clipboard-check" class="w-4 h-4"></i></div>
+                        <span class="font-bold text-primary text-xs uppercase tracking-wider">Administrators</span>
                     </div>
-                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4 hover:border-secondary/30 transition-colors">
-                        <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-primary"><i data-lucide="monitor" class="w-6 h-6"></i></div>
-                        <span class="font-bold text-primary">HDOS Operators</span>
+                    <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm flex items-center gap-3 hover:border-secondary/30 transition-colors">
+                        <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center text-primary"><i data-lucide="monitor" class="w-4 h-4"></i></div>
+                        <span class="font-bold text-primary text-xs uppercase tracking-wider">HDOS Operators</span>
                     </div>
-                    <div class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-center gap-4 hover:border-secondary/30 transition-colors">
-                        <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-primary"><i data-lucide="users" class="w-6 h-6"></i></div>
-                        <span class="font-bold text-primary">Employees</span>
+                    <div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm flex items-center gap-3 hover:border-secondary/30 transition-colors">
+                        <div class="w-8 h-8 bg-blue-50 rounded-lg flex items-center justify-center text-primary"><i data-lucide="users" class="w-4 h-4"></i></div>
+                        <span class="font-bold text-primary text-xs uppercase tracking-wider">Employees</span>
                     </div>
                 </div>
             </div>
 
             <!-- Accountability Flow -->
-            <div class="mt-24">
-                <div class="text-center mb-12">
-                    <h4 class="text-2xl font-serif font-bold text-primary mb-4">Accountability Flow</h4>
-                    <p class="text-slate-500">Capability ownership flows from executive governance to daily execution.</p>
+            <div class="mt-10">
+                <div class="text-center mb-8">
+                    <h4 class="text-2xl font-serif font-bold text-primary mb-2">Accountability Flow</h4>
+                    <p class="text-sm text-slate-500">Capability ownership flows from executive governance to daily execution.</p>
                 </div>
                 
-                <div class="max-w-4xl mx-auto space-y-4">
-                    <!-- Flow Diagram -->
-                    <div class="relative">
-                        <!-- Top Level -->
-                        <div class="bg-primary text-white p-6 rounded-2xl text-center font-bold tracking-widest uppercase shadow-lg relative z-10">
+                <div class="max-w-3xl mx-auto">
+                    <div class="flex flex-col items-center gap-0">
+                        <div class="w-full bg-primary text-white px-8 py-5 rounded-2xl text-center font-bold tracking-widest uppercase shadow-lg text-sm">
                             Executive Governance
                         </div>
-                        <!-- Connector -->
-                        <div class="w-px h-8 bg-slate-200 mx-auto"></div>
-                        <!-- AICGO Level -->
-                        <div class="bg-secondary text-white p-6 rounded-2xl text-center font-bold tracking-widest uppercase shadow-lg relative z-10">
+                        <div class="w-px h-8 bg-slate-300"></div>
+                        <div class="w-full bg-secondary text-white px-8 py-5 rounded-2xl text-center font-bold tracking-widest uppercase shadow-lg text-sm">
                             AICGO (Governance Ownership)
                         </div>
-                        <!-- Connector -->
-                        <div class="w-px h-8 bg-slate-200 mx-auto"></div>
-                        <!-- Execution Level -->
-                        <div class="bg-slate-100 text-primary p-6 rounded-2xl text-center font-bold tracking-widest uppercase border border-slate-200 relative z-10">
+                        <div class="w-px h-8 bg-slate-300"></div>
+                        <div class="w-full bg-slate-100 text-primary px-8 py-5 rounded-2xl text-center font-bold tracking-widest uppercase border border-slate-200 text-sm">
                             Workflow / Daily Execution
                         </div>
                     </div>
@@ -649,27 +508,502 @@
         </div>
     </section>
 
+    <section id="shift" class="section-padding bg-slate-50 border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h2 class="text-xl font-bold text-secondary uppercase tracking-[0.3em] mb-2">The Shift</h2>
+                    <h3 class="text-2xl md:text-4xl font-serif font-bold text-primary mb-4 leading-tight">Transformation fails after implementation.</h3>
+                    <div class="space-y-3 text-sm text-slate-600 leading-relaxed">
+                        <p>Organizations invest heavily in new systems, tools, and AI. Initial performance improves.</p>
+                        <p class="font-semibold text-primary p-3 bg-white rounded-xl shadow-sm border-l-4 border-secondary">Over time, shortcuts emerge, and workarounds replace standards.</p>
+                        <p>The gap between how work is designed and how it is actually done quietly grows.</p>
+                        <p class="text-lg font-serif italic text-secondary pt-1">APO exists to close this gap through capability governance.</p>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="aspect-video bg-white p-6 md:p-8 rounded-[2rem] shadow-2xl border border-slate-100 flex flex-col justify-center">
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-4 group">
+                                <div class="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors"><i data-lucide="trending-up" class="w-5 h-5"></i></div>
+                                <div><h4 class="text-base font-bold text-primary">Initial Investment</h4><p class="text-xs text-slate-500">Systems, Tools, AI adoption</p></div>
+                            </div>
+                            <div class="flex items-center gap-4 group">
+                                <div class="w-10 h-10 bg-red-50 rounded-xl flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-colors"><i data-lucide="trending-down" class="w-5 h-5"></i></div>
+                                <div><h4 class="text-base font-bold text-primary">Natural Decay</h4><p class="text-xs text-slate-500">Workarounds & Alignment Gap</p></div>
+                            </div>
+                            <div class="flex items-center gap-4 group">
+                                <div class="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-white transition-colors"><i data-lucide="shield-check" class="w-5 h-5"></i></div>
+                                <div><h4 class="text-base font-bold text-primary">APO Governance</h4><p class="text-xs text-slate-500">Continuous Calibration</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proof Section -->
+    <section id="proof-stats" class="section-padding bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-5xl font-serif font-bold text-primary italic">Proof, Not Promises</h2>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
+                <div class="bg-slate-50 p-6 rounded-2xl text-center border border-slate-100">
+                    <div class="text-3xl font-bold text-primary mb-1">67%</div>
+                    <div class="text-[9px] font-bold text-slate-400 uppercase tracking-widest leading-tight">Time<br>Reduction</div>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl text-center border border-slate-100">
+                    <div class="text-3xl font-bold text-primary mb-1">15h</div>
+                    <div class="text-[9px] font-bold text-slate-400 uppercase tracking-widest leading-tight">Weekly<br>Saved</div>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl text-center border border-slate-100">
+                    <div class="text-3xl font-bold text-primary mb-1">$12K</div>
+                    <div class="text-[9px] font-bold text-slate-400 uppercase tracking-widest leading-tight">Annual<br>Savings</div>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl text-center border border-slate-100">
+                    <div class="text-3xl font-bold text-primary mb-1">15+</div>
+                    <div class="text-[9px] font-bold text-slate-400 uppercase tracking-widest leading-tight">Nations</div>
+                </div>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-slate-50 p-8 rounded-2xl border-l-[6px] border-[#f1a208] relative">
+                    <blockquote class="text-lg md:text-xl text-slate-600 italic font-serif leading-relaxed mb-4">
+                        "One calibration cycle: prompt structure degraded, new features untouched. Two targeted sessions. Output restored. 4 hours total."
+                    </blockquote>
+                    <cite class="not-italic font-bold text-primary block text-sm">— Marketing Team, Singapore</cite>
+                </div>
+                <p class="text-center mt-6 text-slate-400 text-xs font-medium">Building AI capability infrastructure across 15+ nations. Singapore. East Africa. Southeast Asia.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Capability Decay -->
+    <section id="decay" class="section-padding bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-xl font-bold text-secondary uppercase tracking-[0.3em] mb-3">Why 90 Days</h2>
+                <h3 class="text-3xl md:text-5xl font-serif font-bold text-primary mb-4 text-balance">Why capability degrades over time?</h3>
+                <p class="text-xl text-slate-600 max-w-3xl mx-auto italic font-light">Capability decay is gradual and often invisible.</p>
+                <p class="text-lg text-slate-500 mt-4 max-w-2xl mx-auto">It emerges as systems, tools, and workflows change faster than habits adjust.</p>
+                <div class="mt-8 inline-block px-6 py-2 bg-primary text-white rounded-full font-black uppercase tracking-[0.2em] shadow-xl border-2 border-secondary/30 text-xs">3 - Level Decay Model</div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <div class="p-8 rounded-[2rem] bg-slate-50 border border-slate-100 hover:shadow-xl transition-all">
+                    <div class="text-4xl font-serif font-bold text-slate-200 mb-4">01</div>
+                    <h3 class="text-lg font-bold text-primary mb-3 uppercase tracking-wider">Level 1 — Tool Decay</h3>
+                    <p class="text-slate-600 text-base leading-relaxed">Interfaces and features change regularly. Execution slows as people hesitate or rely on memory.</p>
+                </div>
+                <div class="p-8 rounded-[2rem] bg-slate-50 border border-slate-100 hover:shadow-xl transition-all">
+                    <div class="text-4xl font-serif font-bold text-slate-200 mb-4">02</div>
+                    <h3 class="text-lg font-bold text-primary mb-3 uppercase tracking-wider">Level 2 — Workflow Decay</h3>
+                    <p class="text-slate-600 text-base leading-relaxed">Workarounds replace standard processes. Teams execute differently while believing they are aligned.</p>
+                </div>
+                <div class="p-8 rounded-[2rem] bg-slate-50 border border-slate-100 hover:shadow-xl transition-all">
+                    <div class="text-4xl font-serif font-bold text-slate-200 mb-4">03</div>
+                    <h3 class="text-lg font-bold text-primary mb-3 uppercase tracking-wider">Level 3 — Capability Decay</h3>
+                    <p class="text-slate-600 text-base leading-relaxed">Old habits return. Outcomes become inconsistent and accountability weakens.</p>
+                </div>
+            </div>
+
+            <div class="p-8 md:p-10 bg-primary rounded-[2.5rem] text-white text-center shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+                <h4 class="text-2xl font-serif font-bold mb-4">Governance Principle:</h4>
+                <p class="text-xl text-blue-100 max-w-4xl mx-auto leading-relaxed">A 90-day cadence allows organizations to detect drift early, correct execution, and verify alignment before problems scale.</p>
+                <div class="mt-6 inline-block px-5 py-1.5 border-2 border-secondary rounded-full text-xs font-black uppercase tracking-[0.2em] text-white bg-secondary shadow-[0_0_20px_rgba(59,130,246,0.5)]">This is a governance rhythm, not a training cycle.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Products -->
+    <section id="products" class="section-padding bg-white border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-xl font-bold text-secondary uppercase tracking-[0.3em] mb-3">Products</h2>
+                <h3 class="text-3xl md:text-5xl font-serif font-bold text-primary mb-4 italic text-balance text-center">Execution Readiness Systems</h3>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-6 items-stretch">
+                <!-- Operator Calibration -->
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border-2 border-[#1a365d] flex flex-col h-full relative hover:shadow-2xl transition-all">
+                    <div class="absolute -top-4 left-6">
+                        <span class="bg-[#1a365d] text-white px-4 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest">MOST POPULAR</span>
+                    </div>
+                    
+                    <div class="flex-grow">
+                        <h3 class="text-2xl font-serif font-bold text-primary mb-3">Operator Calibration</h3>
+                        <p class="text-slate-600 mb-6 leading-relaxed text-sm">For professionals, consultants, and SME teams. We audit your real workflows, patch the gaps, and verify the fix every 90 days.</p>
+                        
+                        <div class="mb-8">
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-4xl font-bold text-primary">$497</span>
+                                <span class="text-slate-400 text-xs font-medium ml-1">setup +</span>
+                                <span class="text-2xl font-bold text-primary ml-1">$297</span>
+                                <span class="text-slate-400 text-xs font-medium">/month</span>
+                            </div>
+                        </div>
+
+                        <ul class="space-y-3 text-sm text-slate-600 mb-8">
+                            <li class="flex gap-3 items-start">
+                                <i data-lucide="check" class="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5"></i>
+                                <span>Initial capability audit across real workflows</span>
+                            </li>
+                            <li class="flex gap-3 items-start border-t border-slate-100 pt-3">
+                                <i data-lucide="check" class="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5"></i>
+                                <span>90-day recalibration cycle</span>
+                            </li>
+                            <li class="flex gap-3 items-start border-t border-slate-100 pt-3">
+                                <i data-lucide="check" class="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5"></i>
+                                <span>Live-State Credential (expires, not permanent)</span>
+                            </li>
+                            <li class="flex gap-3 items-start border-t border-slate-100 pt-3">
+                                <i data-lucide="check" class="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5"></i>
+                                <span>Saves 5-10 hours/week in recovered productivity</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-auto">
+                        <a href="#contact" class="w-full inline-flex items-center justify-center px-8 py-3 bg-[#1a365d] text-white font-bold rounded-xl hover:bg-secondary transition-all shadow-lg mb-3">Start Your 90-Day Cycle</a>
+                        <p class="text-[10px] text-slate-400 text-center leading-tight">One recalibrated employee saves $250-500/month in productivity. Pays for itself.</p>
+                    </div>
+                </div>
+
+                <!-- Enterprise HDOS -->
+                <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border border-slate-100 flex flex-col h-full hover:shadow-2xl transition-all">
+                    <div class="flex-grow">
+                        <h3 class="text-2xl font-serif font-bold text-primary mb-3">Enterprise HDOS</h3>
+                        <p class="text-slate-600 mb-6 leading-relaxed text-sm">Governance rhythm at organizational scale. Multi-department deployment for enterprises, government agencies, and SEZ operators.</p>
+                        
+                        <div class="mb-8">
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-4xl font-bold text-primary">Custom</span>
+                                <span class="text-slate-400 text-xs font-medium ml-1">scope</span>
+                            </div>
+                        </div>
+
+                        <ul class="space-y-3 text-sm text-slate-600 mb-8">
+                            <li class="flex gap-3 items-start">
+                                <i data-lucide="check" class="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5"></i>
+                                <span>Multi-department governance rhythm design</span>
+                            </li>
+                            <li class="flex gap-3 items-start border-t border-slate-100 pt-3">
+                                <i data-lucide="check" class="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5"></i>
+                                <span>Capability decay detection systems</span>
+                            </li>
+                            <li class="flex gap-3 items-start border-t border-slate-100 pt-3">
+                                <i data-lucide="check" class="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5"></i>
+                                <span>HDOS Blueprint + Capability Centre</span>
+                            </li>
+                            <li class="flex gap-3 items-start border-t border-slate-100 pt-3">
+                                <i data-lucide="check" class="w-4 h-4 text-green-500 flex-shrink-0 mt-0.5"></i>
+                                <span>Supports ministries, SEZ operators, enterprise clusters</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-auto">
+                        <a href="#contact" onclick="sessionStorage.setItem('preselect', 'deploy')" class="w-full inline-flex items-center justify-center px-8 py-3 bg-[#f1a208] text-[#1a365d] font-black rounded-xl hover:bg-[#d48e07] transition-all shadow-lg mb-3">Request Partnership</a>
+                        <p class="text-[10px] text-slate-400 text-center leading-tight italic">Current: Verde Tech Group — JS-SEZ Malaysia pilot</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-16 max-w-4xl mx-auto">
+                <div class="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-xl border-2 border-dashed border-[#f1a208] text-center relative overflow-hidden">
+                    <h4 class="text-2xl font-serif font-bold text-primary mb-4">Not sure where your team stands?</h4>
+                    <p class="text-slate-600 text-base mb-6 font-medium">Free HCDI Diagnostic. 3 minutes. 6 dimensions.</p>
+                    
+                    <div class="flex flex-wrap justify-center gap-x-3 gap-y-2 mb-8 text-[9px] font-bold text-slate-400 uppercase tracking-widest items-center">
+                        <span>Tool Proficiency</span>
+                        <span class="text-[#f1a208] text-lg">·</span>
+                        <span>Prompt Engineering</span>
+                        <span class="text-[#f1a208] text-lg">·</span>
+                        <span>Workflow Integration</span>
+                        <span class="text-[#f1a208] text-lg">·</span>
+                        <span>Output Quality</span>
+                        <span class="text-[#f1a208] text-lg">·</span>
+                        <span>Adaptation Speed</span>
+                        <span class="text-[#f1a208] text-lg">·</span>
+                        <span>Governance</span>
+                    </div>
+
+                    <a href="https://chatgpt.com/g/g-6985c596f3688191b63904a8df382163-ai-readiness-check-by-apo-mlab" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-10 py-3 bg-[#1a365d] text-white font-bold rounded-xl hover:bg-secondary transition-all shadow-lg text-base group">
+                        Take Free Diagnostic <i data-lucide="arrow-right" class="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center max-w-3xl mx-auto">
+                <p class="text-xl text-slate-600 italic font-serif leading-relaxed">"Calibration corrects drift. Certification verifies that capability has been restored and remains current."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3.5: AI Training Programs -->
+    <section id="training" class="section-padding bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-xl font-bold text-secondary uppercase tracking-[0.3em] mb-3">Development</h2>
+                <h3 class="text-3xl md:text-5xl font-serif font-bold text-primary mb-4">AI Training Programs</h3>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto">Practical AI training and calibration designed to deliver immediate results and long-term capability.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- AI Beginner Orientation -->
+                <div class="bg-white p-6 rounded-[2rem] shadow-lg border border-slate-100 flex flex-col hover:shadow-xl transition-all group">
+                    <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+                        <i data-lucide="compass" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="text-xl font-serif font-bold text-primary mb-3">AI Beginner Orientation</h4>
+                    <p class="text-slate-600 mb-4 text-sm leading-relaxed">2 sessions. Overcome AI fear. Deliver immediate practical wins. For individuals and small teams new to AI tools.</p>
+                    <ul class="space-y-2 mb-6 text-sm text-slate-500 flex-grow">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Zero-to-productive in 2 sessions</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Works with your actual workflows</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> No technical background needed</li>
+                    </ul>
+                    <a href="#contact" class="w-full py-2.5 bg-slate-50 text-primary font-bold rounded-xl text-center hover:bg-primary hover:text-white transition-all text-sm">Inquire Now</a>
+                </div>
+
+                <!-- 2-Week AI Sales Program -->
+                <div class="bg-white p-6 rounded-[2rem] shadow-lg border border-slate-100 flex flex-col hover:shadow-xl transition-all group">
+                    <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+                        <i data-lucide="trending-up" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="text-xl font-serif font-bold text-primary mb-3">2-Week AI Sales Program</h4>
+                    <p class="text-slate-600 mb-4 text-sm leading-relaxed">Save 5+ hours/week with AI sales scripts and automations. Live implementation with your actual pipeline.</p>
+                    <ul class="space-y-2 mb-6 text-sm text-slate-500 flex-grow">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> AI-powered sales scripts</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> CRM automation setup</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Results within 7 days</li>
+                    </ul>
+                    <a href="#contact" class="w-full py-2.5 bg-slate-50 text-primary font-bold rounded-xl text-center hover:bg-primary hover:text-white transition-all text-sm">Inquire Now</a>
+                </div>
+
+                <!-- 6-Week AI Launchpad -->
+                <div class="bg-white p-6 rounded-[2rem] shadow-lg border-2 border-secondary/20 flex flex-col hover:shadow-xl transition-all group relative">
+                    <div class="absolute -top-3 right-8 bg-secondary text-white text-[10px] font-bold px-3 py-1 rounded-full tracking-widest">FLAGSHIP</div>
+                    <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+                        <i data-lucide="rocket" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="text-xl font-serif font-bold text-primary mb-3">6-Week AI Launchpad</h4>
+                    <p class="text-slate-600 mb-4 text-sm leading-relaxed">Complete AI business system, MVP, and 90-day growth plan with personal coaching. From USD 800.</p>
+                    <ul class="space-y-2 mb-6 text-sm text-slate-500 flex-grow">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Full AI business system build</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> MVP + 90-day growth roadmap</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> 1-on-1 coaching included</li>
+                    </ul>
+                    <a href="#contact" class="w-full py-2.5 bg-secondary text-white font-bold rounded-xl text-center hover:bg-primary transition-all text-sm">Join Flagship</a>
+                </div>
+
+                <!-- AI Memory System Masterclass -->
+                <div class="bg-white p-6 rounded-[2rem] shadow-lg border border-slate-100 flex flex-col hover:shadow-xl transition-all group">
+                    <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+                        <i data-lucide="brain-circuit" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="text-xl font-serif font-bold text-primary mb-3">AI Memory Masterclass</h4>
+                    <p class="text-slate-600 mb-4 text-sm leading-relaxed">6 weeks. Build persistent AI memory systems that compound your team’s knowledge. From USD 1,400.</p>
+                    <ul class="space-y-2 mb-6 text-sm text-slate-500 flex-grow">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Notion + Claude integration</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Persistent knowledge systems</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Team knowledge compounding</li>
+                    </ul>
+                    <a href="#contact" class="w-full py-2.5 bg-slate-50 text-primary font-bold rounded-xl text-center hover:bg-primary hover:text-white transition-all text-sm">Inquire Now</a>
+                </div>
+
+                <!-- Corporate AI Consulting -->
+                <div class="bg-white p-6 rounded-[2rem] shadow-lg border border-slate-100 flex flex-col hover:shadow-xl transition-all group">
+                    <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+                        <i data-lucide="building" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="text-xl font-serif font-bold text-primary mb-3">Corporate AI Consulting</h4>
+                    <p class="text-slate-600 mb-4 text-sm leading-relaxed">Process automation, team training, ROI-driven implementations. Custom scope for enterprises across Southeast Asia.</p>
+                    <ul class="space-y-2 mb-6 text-sm text-slate-500 flex-grow">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Process automation audit</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Team capability assessment</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> ROI-driven implementation plan</li>
+                    </ul>
+                    <a href="#contact" class="w-full py-2.5 bg-slate-50 text-primary font-bold rounded-xl text-center hover:bg-primary hover:text-white transition-all text-sm">Get Proposal</a>
+                </div>
+
+                <!-- AI Business Blueprints -->
+                <div class="bg-white p-6 rounded-[2rem] shadow-lg border border-slate-100 flex flex-col hover:shadow-xl transition-all group">
+                    <div class="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+                        <i data-lucide="layers" class="w-6 h-6"></i>
+                    </div>
+                    <h4 class="text-xl font-serif font-bold text-primary mb-3">AI Business Blueprints</h4>
+                    <p class="text-slate-600 mb-4 text-sm leading-relaxed">Ready-to-implement systems: sales playbooks, content engines, productivity workflows for immediate scaling.</p>
+                    <ul class="space-y-2 mb-6 text-sm text-slate-500 flex-grow">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Sales playbook templates</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Content engine systems</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-green-500"></i> Productivity workflows</li>
+                    </ul>
+                    <a href="#contact" class="w-full py-2.5 bg-slate-50 text-primary font-bold rounded-xl text-center hover:bg-primary hover:text-white transition-all text-sm">Access Blueprints</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Proof & Deployments -->
+    <section id="proof" class="section-padding bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <h2 class="text-xl font-bold text-secondary uppercase tracking-[0.3em] mb-3">Proof & Deployments</h2>
+                <h3 class="text-3xl md:text-5xl font-serif font-bold text-primary mb-6 italic">Real-World Execution</h3>
+                <p class="text-lg text-slate-600 max-w-3xl mx-auto font-light mb-6">APO governance models are operating in real organizational conditions, not ideal scenarios.</p>
+                <div class="w-20 h-1 bg-secondary mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 mb-10">
+                <div class="group relative overflow-hidden rounded-[2rem] shadow-2xl h-80">
+                    <img src="https://images.unsplash.com/photo-1525498128493-380d1990a112?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/20 to-transparent flex flex-col justify-end p-8 text-white">
+                        <h4 class="text-2xl font-bold mb-2">Singapore</h4>
+                        <p class="text-blue-100 font-medium text-sm">HQ and architecture</p>
+                    </div>
+                </div>
+                <div class="group relative overflow-hidden rounded-[2rem] shadow-2xl h-80">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/20 to-transparent flex flex-col justify-end p-8 text-white">
+                        <h4 class="text-2xl font-bold mb-2">Malaysia</h4>
+                        <p class="text-blue-100 font-medium text-sm">JS-SEZ capability governance</p>
+                    </div>
+                </div>
+                <div class="group relative overflow-hidden rounded-[2rem] shadow-2xl h-80">
+                    <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-primary via-primary/20 to-transparent flex flex-col justify-end p-8 text-white">
+                        <h4 class="text-2xl font-bold mb-2">Rwanda</h4>
+                        <p class="text-blue-100 font-medium text-sm">Workforce calibration pilots</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center p-10 bg-slate-900 rounded-[3rem] shadow-2xl">
+                <h4 class="text-white text-xl font-serif mb-6">Access our regional operational hubs</h4>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="singapore.html" class="inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-bold rounded-xl shadow-xl hover:bg-secondary transition-all hover:scale-105 active:scale-95 text-sm">
+                        Singapore HQ <i data-lucide="building-2" class="ml-2 w-4 h-4"></i>
+                    </a>
+                    <a href="malaysia.html" class="inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-bold rounded-xl shadow-xl hover:bg-secondary transition-all hover:scale-105 active:scale-95 text-sm">
+                        Malaysia <i data-lucide="network" class="ml-2 w-4 h-4"></i>
+                    </a>
+                    <a href="philippines.html" class="inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-bold rounded-xl shadow-xl hover:bg-secondary transition-all hover:scale-105 active:scale-95 text-sm">
+                        Philippines <i data-lucide="zap" class="ml-2 w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="section-padding bg-slate-50 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="pt-8">
+                <h3 class="text-2xl font-serif font-bold text-primary mb-8">Team</h3>
+                <div class="grid grid-cols-1 gap-8">
+                    <!-- Gunther Hess -->
+                    <div class="bg-white p-8 rounded-[3rem] shadow-xl border border-slate-100 flex flex-col items-center text-center">
+                        <div class="w-80 h-80 rounded-full overflow-hidden bg-white shadow-2xl border-8 border-white mb-8">
+                            <img src="gunther-hess.jpeg" alt="Mr. Günther Erwin Hess" class="w-full h-full object-cover scale-150 transition-transform duration-500 hover:scale-[1.65]">
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-serif font-bold text-primary mb-1">Mr. Günther Erwin Hess</h4>
+                            <p class="text-sm text-secondary font-bold uppercase tracking-widest mb-1">Co-Founder, Principal Architect — AI Covenant Systems</p>
+                            <p class="text-xs text-slate-500 mb-6">APO MLAB Pte Ltd (Singapore)</p>
+                        </div>
+                        <div class="space-y-4 text-slate-600 text-base leading-relaxed max-w-lg">
+                            <p>Günther Erwin Hess is a senior systems architect and AI transformation leader with over 20 years of cross-cultural enterprise experience across Europe, Southeast Asia, and Africa. With a background that includes consulting engagements with KPMG and SAP environments, he brings deep expertise in designing and operationalising large-scale capability and workforce systems for complex, multi-stakeholder organisations.</p>
+                            <p>Günther specialises in AI-enabled workforce planning, capability operating systems, and enterprise-grade AI architecture, focusing on the integration of human capability, digital intelligence, and operational governance. His work emphasises building foundational systems that allow organisations to scale sustainably, align talent with execution needs, and maintain operational coherence across diverse functions and geographies.</p>
+                            <p>He has led and delivered programmes across Germany, Singapore, Malaysia, the Philippines, Kenya, Uganda, and Rwanda, supporting enterprises, public-sector bodies, and ecosystem developers. His experience includes designing 90-day synchronisation frameworks that bring leadership, operations, and workforce execution into aligned cycles—reducing fragmentation, accelerating readiness, and improving delivery outcomes.</p>
+                            <p>Known for his systems-first approach, Günther focuses on deploying AI as infrastructure rather than tools, ensuring governance, interoperability, and long-term resilience. His work supports organisations navigating transformation, regulatory complexity, and rapid scale-up while maintaining clarity of accountability and execution discipline.</p>
+                        </div>
+                    </div>
+
+                    <!-- Ezekiel Ang -->
+                    <div class="bg-white p-8 rounded-[3rem] shadow-xl border border-slate-100 flex flex-col items-center text-center">
+                        <div class="w-80 h-80 rounded-full overflow-hidden bg-white shadow-2xl border-8 border-white mb-8">
+                            <img src="Ezekiel-new.jpeg" alt="Mr. Ezekiel Ang"
+class="w-full h-full object-cover"
+style="transform: scale(1.2) translateY(-8%); transform-origin: center top;">
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-serif font-bold text-primary mb-1">Mr. Ezekiel Ang</h4>
+                            <p class="text-sm text-secondary font-bold uppercase tracking-widest mb-1">Co-Founder | Chief Market Strategist & Capability Development Lead</p>
+                            <p class="text-xs text-slate-500 mb-6">APO MLAB Pte Ltd (Singapore)</p>
+                        </div>
+                        <div class="space-y-4 text-slate-600 text-base leading-relaxed max-w-lg">
+                            <p>Ezekiel Ang specializes in the structured integration of AI capability systems within the SME sector. As Co-Founder of APO MLAB, he focuses on making AI adoption commercially viable and operationally defensible — moving organizations beyond tool dependency toward full organizational capability.</p>
+                            <p>Drawing on direct market development experience across Singapore, Malaysia, Philippines, Indonesia, Vietnam, and South Africa, Ezekiel addresses the core bottlenecks that limit SME scalability: inconsistent execution, accountability gaps, and workflow fragmentation. His methodology is built on three pillars — clear SOP architecture, ownership-driven accountability structures, and rigorous calibration cycles tied to business outcomes.</p>
+                            <p>By aligning AI capability systems with local market realities and compliance requirements, Ezekiel enables business leaders to scale through systemization — reducing operational risk while building institutional resilience.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-200 pt-12 mt-12">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+                    <div class="max-w-2xl">
+                        <h3 class="text-2xl font-serif font-bold text-primary mb-2">Advisory Board</h3>
+                        <p class="text-base text-slate-600">
+                            APO MLAB is supported by an Advisory Board providing institutional oversight and strategic guidance.
+                        </p>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <span class="inline-block px-3 py-1 bg-slate-100 text-slate-500 rounded-full text-[10px] font-bold uppercase tracking-widest border border-slate-200">Session 2026 In Formation</span>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="p-6 rounded-2xl border border-dashed border-slate-200 bg-slate-50/50 flex flex-col items-center text-center">
+                        <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-300 mb-3">
+                            <i data-lucide="user" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-400 mb-1 italic underline text-sm">Governance Lead</h4>
+                        <p class="text-[10px] text-slate-400">Institutional Strategy</p>
+                    </div>
+                    <div class="p-6 rounded-2xl border border-dashed border-slate-200 bg-slate-50/50 flex flex-col items-center text-center">
+                        <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-300 mb-3">
+                            <i data-lucide="user" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-400 mb-1 italic underline text-sm">Compliance Lead</h4>
+                        <p class="text-[10px] text-slate-400">Regulatory & Data Governance</p>
+                    </div>
+                    <div class="p-8 rounded-2xl border border-dashed border-slate-200 bg-slate-50/50 flex flex-col items-center text-center">
+                        <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-300 mb-3">
+                            <i data-lucide="user" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="font-bold text-slate-400 mb-1 italic underline text-sm">Operations Lead</h4>
+                        <p class="text-[10px] text-slate-400">Regional Deployment Strategy</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- About Section -->
-    <section id="about" class="section-padding bg-slate-50 border-t border-slate-200">
+    <section id="about" class="section-padding bg-white border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-16 mb-20">
+            <div class="grid lg:grid-cols-2 gap-12">
                 <div>
-                    <h2 class="text-xl font-bold text-secondary uppercase tracking-[0.3em] mb-4">About</h2>
-                    <h3 class="text-3xl md:text-5xl font-serif font-bold text-primary mb-8">Mission</h3>
-                    <p class="text-2xl text-slate-600 leading-relaxed font-light">
+                    <h2 class="text-xl font-bold text-secondary uppercase tracking-[0.3em] mb-3">About</h2>
+                    <h3 class="text-3xl md:text-5xl font-serif font-bold text-primary mb-6">Mission</h3>
+                    <p class="text-xl text-slate-600 leading-relaxed font-light">
                         APO MLAB builds Human Capability Infrastructure to ensure execution reliability as AI and systems evolve.
                     </p>
                 </div>
                 <div>
-                    <h3 class="text-2xl font-serif font-bold text-primary mb-6">Governance Philosophy</h3>
-                    <p class="text-xl text-slate-600 leading-relaxed">
+                    <h3 class="text-2xl font-serif font-bold text-primary mb-4">Governance Philosophy</h3>
+                    <p class="text-lg text-slate-600 leading-relaxed">
                         We design systems that make capability visible, assign accountability, and preserve alignment over time.
                     </p>
                     
-                    <div class="mt-12">
-                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-6">Institutional Presence</h4>
-                        <div class="flex flex-wrap gap-6 text-primary font-bold tracking-wider">
+                    <div class="mt-8">
+                        <h4 class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-4">Institutional Presence</h4>
+                        <div class="flex flex-wrap gap-4 text-primary font-bold tracking-wider text-sm">
                             <span class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-secondary"></i> Singapore (HQ)</span>
                             <span class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-secondary"></i> Malaysia</span>
                             <span class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4 text-secondary"></i> Rwanda</span>
@@ -678,76 +1012,69 @@
                     </div>
                 </div>
             </div>
-
-            <div class="border-t border-slate-200 pt-16">
-                <h3 class="text-3xl font-serif font-bold text-primary mb-4">Advisory Board</h3>
-                <p class="text-lg text-slate-600 max-w-2xl">
-                    APO MLAB is supported by an Advisory Board providing institutional oversight and strategic guidance.
-                </p>
-            </div>
         </div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="section-padding bg-white hidden">
+    <section id="skills" class="section-padding bg-slate-50 border-t border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-16">
+            <div class="grid lg:grid-cols-2 gap-12">
                 <div>
-                    <h2 class="text-3xl font-serif font-bold text-primary mb-8">Expertise & Skills</h2>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="p-4 bg-slate-50 rounded-lg flex items-center gap-3">
-                            <i data-lucide="bot" class="text-secondary w-5 h-5"></i>
-                            <span class="font-medium">AI Multi-Agent Systems</span>
+                    <h2 class="text-2xl font-serif font-bold text-primary mb-6">Expertise & Skills</h2>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="p-3 bg-white rounded-lg flex items-center gap-3 shadow-sm border border-slate-100">
+                            <i data-lucide="bot" class="text-secondary w-4 h-4"></i>
+                            <span class="font-medium text-sm">AI Multi-Agent Systems</span>
                         </div>
-                        <div class="p-4 bg-slate-50 rounded-lg flex items-center gap-3">
-                            <i data-lucide="zap" class="text-secondary w-5 h-5"></i>
-                            <span class="font-medium">Workflow Automation</span>
+                        <div class="p-3 bg-white rounded-lg flex items-center gap-3 shadow-sm border border-slate-100">
+                            <i data-lucide="zap" class="text-secondary w-4 h-4"></i>
+                            <span class="font-medium text-sm">Workflow Automation</span>
                         </div>
-                        <div class="p-4 bg-slate-50 rounded-lg flex items-center gap-3">
-                            <i data-lucide="code" class="text-secondary w-5 h-5"></i>
-                            <span class="font-medium">FastAPI & Supabase</span>
+                        <div class="p-3 bg-white rounded-lg flex items-center gap-3 shadow-sm border border-slate-100">
+                            <i data-lucide="code" class="text-secondary w-4 h-4"></i>
+                            <span class="font-medium text-sm">FastAPI & Supabase</span>
                         </div>
-                        <div class="p-4 bg-slate-50 rounded-lg flex items-center gap-3">
-                            <i data-lucide="layout-dashboard" class="text-secondary w-5 h-5"></i>
-                            <span class="font-medium">Activation Frameworks</span>
+                        <div class="p-3 bg-white rounded-lg flex items-center gap-3 shadow-sm border border-slate-100">
+                            <i data-lucide="layout-dashboard" class="text-secondary w-4 h-4"></i>
+                            <span class="font-medium text-sm">Activation Frameworks</span>
                         </div>
-                        <div class="p-4 bg-slate-50 rounded-lg flex items-center gap-3">
-                            <i data-lucide="settings" class="text-secondary w-5 h-5"></i>
-                            <span class="font-medium">Workforce Engines</span>
+                        <div class="p-3 bg-white rounded-lg flex items-center gap-3 shadow-sm border border-slate-100">
+                            <i data-lucide="settings" class="text-secondary w-4 h-4"></i>
+                            <span class="font-medium text-sm">Workforce Engines</span>
                         </div>
-                        <div class="p-4 bg-slate-50 rounded-lg flex items-center gap-3">
-                            <i data-lucide="shopping-bag" class="text-secondary w-5 h-5"></i>
-                            <span class="font-medium">SME Enablement</span>
+                        <div class="p-3 bg-white rounded-lg flex items-center gap-3 shadow-sm border border-slate-100">
+                            <i data-lucide="shopping-bag" class="text-secondary w-4 h-4"></i>
+                            <span class="font-medium text-sm">SME Enablement</span>
                         </div>
-                        <div class="p-4 bg-slate-50 rounded-lg flex items-center gap-3">
-                            <i data-lucide="globe-2" class="text-secondary w-5 h-5"></i>
-                            <span class="font-medium">Cross-Cultural Ops</span>
+                        <div class="p-3 bg-white rounded-lg flex items-center gap-3 shadow-sm border border-slate-100">
+                            <i data-lucide="globe-2" class="text-secondary w-4 h-4"></i>
+                            <span class="font-medium text-sm">Cross-Cultural Ops</span>
                         </div>
-                        <div class="p-4 bg-slate-50 rounded-lg flex items-center gap-3">
-                            <i data-lucide="bar-chart-3" class="text-secondary w-5 h-5"></i>
-                            <span class="font-medium">Systems Thinking</span>
+                        <div class="p-3 bg-white rounded-lg flex items-center gap-3 shadow-sm border border-slate-100">
+                            <i data-lucide="bar-chart-3" class="text-secondary w-4 h-4"></i>
+                            <span class="font-medium text-sm">Systems Thinking</span>
                         </div>
                     </div>
                 </div>
                 <div>
-                    <h2 class="text-3xl font-serif font-bold text-primary mb-8">Selected Publications</h2>
-                    <div class="space-y-6">
-                        <a href="#" class="block p-6 bg-slate-900 text-white rounded-2xl hover:bg-slate-800 transition-colors group">
+                    <h2 class="text-2xl font-serif font-bold text-primary mb-6">Selected Publications</h2>
+                    <div class="space-y-4">
+                        <a href="#" class="block p-5 bg-slate-900 text-white rounded-2xl hover:bg-slate-800 transition-colors group">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <h3 class="text-xl font-bold mb-2">Kingdom AI</h3>
-                                    <p class="text-slate-400 text-sm">Strategic insights into the intersection of faith-based principles and artificial intelligence systems.</p>
+                                    <h3 class="text-lg font-bold mb-1">Kingdom AI</h3>
+                                    <p class="text-slate-400 text-xs leading-relaxed">Strategic insights into the intersection of faith-based principles and artificial intelligence systems.</p>
                                 </div>
-                                <i data-lucide="external-link" class="opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                <i data-lucide="external-link" class="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity"></i>
                             </div>
                         </a>
-                        <a href="#" class="block p-6 bg-secondary text-white rounded-2xl hover:bg-blue-700 transition-colors group">
+                        <a href="#" class="block p-5 bg-secondary text-white rounded-2xl hover:bg-blue-700 transition-colors group">
                             <div class="flex justify-between items-start">
                                 <div>
-                                    <h3 class="text-xl font-bold mb-2">The Kingdom Steward Challenge</h3>
-                                    <p class="text-blue-100 text-sm">A framework for effective management and stewardship in modern organizational structures.</p>
+                                    <h3 class="text-lg font-bold mb-1">The Kingdom Steward Challenge</h3>
+                                    <p class="text-blue-100 text-xs leading-relaxed">A framework for effective management and stewardship in modern organizational structures.</p>
                                 </div>
-                                <i data-lucide="external-link" class="opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                <i data-lucide="external-link" class="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity"></i>
                             </div>
                         </a>
                     </div>
@@ -757,30 +1084,404 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section class="section-padding bg-slate-50">
+    <section id="testimonials" class="section-padding bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-serif font-bold text-primary mb-4">What Partners Say</h2>
-                <div class="w-20 h-1 bg-secondary mx-auto"></div>
+            <div class="text-center mb-10">
+                <h2 class="text-2xl font-serif font-bold text-primary mb-2">What Partners Say</h2>
+                <div class="w-16 h-1 bg-secondary mx-auto"></div>
             </div>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 italic text-slate-600 relative">
-                    <i data-lucide="quote" class="absolute top-4 right-4 text-slate-100 w-12 h-12"></i>
-                    <p class="relative z-10 mb-6">"Gunther's ability to simplify complex AI architectures into actionable SME frameworks is unparalleled. His cross-cultural background makes him a unique asset for global projects."</p>
-                    <div class="font-bold text-primary not-italic">— Dr. Marcus Weber</div>
-                    <div class="text-sm text-slate-500 not-italic">Strategic Advisor, Berlin</div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-slate-50 p-6 rounded-2xl shadow-sm border border-slate-100 italic text-slate-600 relative">
+                    <i data-lucide="quote" class="absolute top-4 right-4 text-slate-200 w-8 h-8"></i>
+                    <p class="relative z-10 mb-4 text-sm leading-relaxed">"Gunther's ability to simplify complex AI architectures into actionable SME frameworks is unparalleled. His cross-cultural background makes him a unique asset."</p>
+                    <div class="font-bold text-primary not-italic text-sm">— Dr. Marcus Weber</div>
+                    <div class="text-[10px] text-slate-500 not-italic uppercase tracking-wider">Strategic Advisor, Berlin</div>
                 </div>
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 italic text-slate-600 relative">
-                    <i data-lucide="quote" class="absolute top-4 right-4 text-slate-100 w-12 h-12"></i>
-                    <p class="relative z-10 mb-6">"Working with Gunther on the Rwanda AI initiative was eye-opening. He understands how to build systems that actually work on the ground, not just on paper."</p>
-                    <div class="font-bold text-primary not-italic">— Sarah Kamau</div>
-                    <div class="text-sm text-slate-500 not-italic">Tech Hub Director, Kigali</div>
+                <div class="bg-slate-50 p-6 rounded-2xl shadow-sm border border-slate-100 italic text-slate-600 relative">
+                    <i data-lucide="quote" class="absolute top-4 right-4 text-slate-200 w-8 h-8"></i>
+                    <p class="relative z-10 mb-4 text-sm leading-relaxed">"Working with Gunther on the Rwanda AI initiative was eye-opening. He understands how to build systems that actually work on the ground, not just on paper."</p>
+                    <div class="font-bold text-primary not-italic text-sm">— Sarah Kamau</div>
+                    <div class="text-[10px] text-slate-500 not-italic uppercase tracking-wider">Tech Hub Director, Kigali</div>
                 </div>
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 italic text-slate-600 relative">
-                    <i data-lucide="quote" class="absolute top-4 right-4 text-slate-100 w-12 h-12"></i>
-                    <p class="relative z-10 mb-6">"His expertise in multi-agent systems helped us automate workflows we thought were impossible to digitize. Truly a visionary in the enterprise AI space."</p>
-                    <div class="font-bold text-primary not-italic">— Jason Chen</div>
-                    <div class="text-sm text-slate-500 not-italic">CEO, Singapore Tech Solutions</div>
+                <div class="bg-slate-50 p-6 rounded-2xl shadow-sm border border-slate-100 italic text-slate-600 relative">
+                    <i data-lucide="quote" class="absolute top-4 right-4 text-slate-200 w-8 h-8"></i>
+                    <p class="relative z-10 mb-4 text-sm leading-relaxed">"His expertise in multi-agent systems helped us automate workflows we thought were impossible. Truly a visionary in the enterprise AI space."</p>
+                    <div class="font-bold text-primary not-italic text-sm">— Jason Chen</div>
+                    <div class="text-[10px] text-slate-500 not-italic uppercase tracking-wider">CEO, Singapore Tech Solutions</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-10 bg-slate-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-serif font-bold text-primary mb-2">Frequently Asked Questions</h2>
+                <div class="w-12 h-1 bg-secondary mx-auto"></div>
+            </div>
+
+            <div class="space-y-2">
+                <!-- 🧠 About the Program -->
+                <div class="faq-category-group border-b border-slate-200 last:border-0 pb-2">
+                    <button class="faq-category-toggle w-full text-left flex justify-between items-center py-2 group">
+                        <h3 class="text-lg font-serif font-bold text-primary flex items-center gap-2">
+                            <span class="text-xl">🧠</span> About the Program
+                        </h3>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-hover:text-secondary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-category-content mt-1 space-y-3 pl-8">
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">What does Apomlab actually help my business achieve?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab helps your company move from people-dependent operations to a structured AI-assisted operating system, so the business can run consistently even without constant owner involvement.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">How is this different from a normal AI course?</h4>
+                                <p class="text-slate-600 leading-relaxed">Unlike typical courses, Apomlab implements workflows directly inside your business. You don’t just learn AI — you leave with operational systems already working.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Do I need technical knowledge to join?</h4>
+                                <p class="text-slate-600 leading-relaxed">No. Apomlab is designed specifically for business owners and managers, not programmers.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Is this suitable for non-tech business owners?</h4>
+                                <p class="text-slate-600 leading-relaxed">Yes. Apomlab translates AI into daily operations such as sales, hiring, admin, and reporting.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Will I really build something during the sessions?</h4>
+                                <p class="text-slate-600 leading-relaxed">Yes. Every Apomlab session produces real outputs integrated into your company processes.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">What industries benefit the most?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab works best for service businesses, agencies, education, property, consulting, healthcare, and more operational MSMEs.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Can service businesses use this?</h4>
+                                <p class="text-slate-600 leading-relaxed">Yes — service companies usually see the fastest ROI with Apomlab due to repeated communication workflows.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Can product/e-commerce businesses use this?</h4>
+                                <p class="text-slate-600 leading-relaxed">Yes — Apomlab helps automate inquiries, order workflows, and operational reporting.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ⚙️ AI Automation & SOP -->
+                <div class="faq-category-group border-b border-slate-200 last:border-0 pb-2">
+                    <button class="faq-category-toggle w-full text-left flex justify-between items-center py-2 group">
+                        <h3 class="text-lg font-serif font-bold text-primary flex items-center gap-2">
+                            <span class="text-xl">⚙️</span> AI Automation & SOP
+                        </h3>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-hover:text-secondary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-category-content mt-1 space-y-3 pl-8">
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">What is an AI-powered SOP?</h4>
+                                <p class="text-slate-600 leading-relaxed">In Apomlab, an SOP is no longer just a document — it becomes a working system where AI assists in executing the process.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">What processes can be automated first?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab usually starts with customer replies, follow-ups, onboarding, and reporting — the highest time-draining tasks.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Can AI replace staff?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab uses AI to assist staff, not replace them. The goal is higher productivity, not downsizing.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Will AI make mistakes?</h4>
+                                <p class="text-slate-600 leading-relaxed">Yes, which is why Apomlab designs control layers and review steps.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">How do you ensure quality control?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab builds approval checkpoints and structured instructions into workflows.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">What tools will we use?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab integrates AI with commonly used business platforms you already operate.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Do I need paid AI subscriptions?</h4>
+                                <p class="text-slate-600 leading-relaxed">No. Apomlab starts using free or trial tools first, then only recommends paid plans once ROI is proven.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Can this connect to my existing CRM or WhatsApp?</h4>
+                                <p class="text-slate-600 leading-relaxed">Yes. Apomlab designs systems around your current tools whenever possible.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Can AI handle customer inquiries?</h4>
+                                <p class="text-slate-600 leading-relaxed">Yes — Apomlab systems can respond to common questions and assist front-line communication.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Can AI generate reports automatically?</h4>
+                                <p class="text-slate-600 leading-relaxed">Yes — Apomlab can automate summaries and performance reporting.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 📈 Results & Implementation -->
+                <div class="faq-category-group border-b border-slate-200 last:border-0 pb-2">
+                    <button class="faq-category-toggle w-full text-left flex justify-between items-center py-2 group">
+                        <h3 class="text-lg font-serif font-bold text-primary flex items-center gap-2">
+                            <span class="text-xl">📈</span> Results & Implementation
+                        </h3>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-hover:text-secondary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-category-content mt-1 space-y-3 pl-8">
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">How fast can I see ROI?</h4>
+                                <p class="text-slate-600 leading-relaxed">Many Apomlab clients start seeing time savings within weeks after implementation.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">How many hours can I realistically save weekly?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab implementations typically save 5–15 owner hours weekly depending on workflow complexity.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">What happens after the training ends?</h4>
+                                <p class="text-slate-600 leading-relaxed">With Apomlab, you keep the systems and know how to maintain them. We do 90 days calibration with a Monday subscription.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Will my team know how to use it?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab designs systems simple enough for everyday staff usage.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Do you help implement it into daily operations?</h4>
+                                <p class="text-slate-600 leading-relaxed">Yes — implementation is a core part of the Apomlab program.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">What if my team resists using AI?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab introduces AI gradually so teams see it as assistance, not replacement.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">How do I measure productivity improvement?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab tracks response time, workload reduction, and consistency improvements.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">What KPIs should I track after automation?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab recommends tracking turnaround time, response speed, error rate, and owner involvement.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 🧩 Calibration & Support -->
+                <div class="faq-category-group border-b border-slate-200 last:border-0 pb-2">
+                    <button class="faq-category-toggle w-full text-left flex justify-between items-center py-2 group">
+                        <h3 class="text-lg font-serif font-bold text-primary flex items-center gap-2">
+                            <span class="text-xl">🧩</span> Calibration & Support
+                        </h3>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-hover:text-secondary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-category-content mt-1 space-y-3 pl-8">
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">What is the 90-Day Calibration?</h4>
+                                <p class="text-slate-600 leading-relaxed">The Apomlab 90-Day Calibration is a follow-up phase where systems are refined based on real business usage.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Why do businesses fail after training without calibration?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab recognises that real operations evolve — calibration ensures systems stay effective.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Do you customise the system for my company?</h4>
+                                <p class="text-slate-600 leading-relaxed">Yes — Apomlab builds workflows based on your actual processes.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">How often are check-ins?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab schedules regular guided sessions during calibration.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Do you troubleshoot workflows?</h4>
+                                <p class="text-slate-600 leading-relaxed">Yes — Apomlab continuously adjusts what doesn’t work in real conditions.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Do you optimise prompts continuously?</h4>
+                                <p class="text-slate-600 leading-relaxed">Yes — Apomlab improves instructions as your operations grow.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Is support via WhatsApp or Zoom?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab provides support through online communication and live sessions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 🔒 Security & Compliance -->
+                <div class="faq-category-group border-b border-slate-200 last:border-0 pb-2">
+                    <button class="faq-category-toggle w-full text-left flex justify-between items-center py-2 group">
+                        <h3 class="text-lg font-serif font-bold text-primary flex items-center gap-2">
+                            <span class="text-xl">🔒</span> Security & Compliance
+                        </h3>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-hover:text-secondary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-category-content mt-1 space-y-3 pl-8">
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Is the system PDPA-compliant for Singapore businesses?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab designs workflows aligned with responsible data handling practices.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Is business data safe with AI?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab teaches safe usage and boundaries for data handling.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Do you store company information?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab does not store your operational business data.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Can sensitive client data be protected?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab implements approval and restriction layers where necessary.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Do you teach proper AI governance?</h4>
+                                <p class="text-slate-600 leading-relaxed">Yes — responsible AI usage is part of the Apomlab methodology.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 👥 Team & Adoption -->
+                <div class="faq-category-group border-b border-slate-200 last:border-0 pb-2">
+                    <button class="faq-category-toggle w-full text-left flex justify-between items-center py-2 group">
+                        <h3 class="text-lg font-serif font-bold text-primary flex items-center gap-2">
+                            <span class="text-xl">👥</span> Team & Adoption
+                        </h3>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-hover:text-secondary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-category-content mt-1 space-y-3 pl-8">
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">How do I introduce AI to employees without fear?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab positions AI as a workload reducer, not a job replacer.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Will AI remove jobs in my company?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab improves staff productivity rather than eliminating roles.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Can different departments use it?</h4>
+                                <p class="text-slate-600 leading-relaxed">Yes — Apomlab systems support sales, HR, admin, and operations.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Can managers monitor performance easier?</h4>
+                                <p class="text-slate-600 leading-relaxed">Yes — Apomlab automates operational visibility.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Do you train leaders or staff?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab primarily trains leaders so systems cascade to teams easily.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 💰 Pricing & Commitment -->
+                <div class="faq-category-group border-b border-slate-200 last:border-0 pb-2">
+                    <button class="faq-category-toggle w-full text-left flex justify-between items-center py-2 group">
+                        <h3 class="text-lg font-serif font-bold text-primary flex items-center gap-2">
+                            <span class="text-xl">💰</span> Pricing & Commitment
+                        </h3>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-hover:text-secondary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-category-content mt-1 space-y-3 pl-8">
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Is this a one-time payment or subscription?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab engagements are structured by implementation phases.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">What’s included in the program?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab includes training, workflow design, implementation guidance, and calibration.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Are tools included in the fee?</h4>
+                                <p class="text-slate-600 leading-relaxed">Software subscriptions are separate from Apomlab services.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">What if I miss a session?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab provides support to help you catch up.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Is there a refund policy?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab terms are shared during enrollment.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Do you offer corporate packages?</h4>
+                                <p class="text-slate-600 leading-relaxed">Yes — Apomlab supports team enrollments.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 🌏 Availability -->
+                <div class="faq-category-group border-b border-slate-200 last:border-0 pb-2">
+                    <button class="faq-category-toggle w-full text-left flex justify-between items-center py-2 group">
+                        <h3 class="text-lg font-serif font-bold text-primary flex items-center gap-2">
+                            <span class="text-xl">🌏</span> Availability
+                        </h3>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-hover:text-secondary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-category-content mt-1 space-y-3 pl-8">
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Do you serve companies outside Singapore?</h4>
+                                <p class="text-slate-600 leading-relaxed">Yes — Apomlab supports international clients online.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Is the training online or onsite?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab primarily runs online & onsite sessions for flexibility.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">What timezone is the program conducted?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab schedules sessions based on cohort timing.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Can overseas teams join together?</h4>
+                                <p class="text-slate-600 leading-relaxed">Yes — companies can enroll multiple participants in Apomlab.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 🎯 Decision Questions -->
+                <div class="faq-category-group border-b border-slate-200 last:border-0 pb-2">
+                    <button class="faq-category-toggle w-full text-left flex justify-between items-center py-2 group">
+                        <h3 class="text-lg font-serif font-bold text-primary flex items-center gap-2">
+                            <span class="text-xl">🎯</span> Decision Questions
+                        </h3>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-slate-400 group-hover:text-secondary transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-category-content mt-1 space-y-3 pl-8">
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">I’m busy — will this add more work?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab requires short setup effort but reduces ongoing workload.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">I tried AI before but it didn’t work — why is this different?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab focuses on workflow integration, not just prompts.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">My business is small — is this overkill?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab helps small businesses the most because owners carry many roles.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">My business is big — is this scalable?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab systems scale across departments.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">What happens if AI changes next year?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab teaches operational principles that adapt to new tools.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Is now the right time to implement AI?</h4>
+                                <p class="text-slate-600 leading-relaxed">Apomlab helps businesses adopt early before competitors catch up.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -789,107 +1490,148 @@
     <!-- Contact Section -->
     <section id="contact" class="section-padding bg-primary text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-16">
+            <div class="grid lg:grid-cols-2 gap-12">
                 <div>
-                    <h2 class="text-4xl font-serif font-bold mb-8">Let's connect</h2>
-                    <p class="text-blue-100 mb-12 max-w-md">
+                    <h2 class="text-3xl font-serif font-bold mb-6">Let's connect</h2>
+                    <p class="text-blue-100 mb-8 max-w-md text-sm">
                         Whether you're looking for AI infrastructure consulting, workforce readiness frameworks, or cross-cultural operational strategy, I'm here to help.
                     </p>
                     
-                    <div class="space-y-6">
+                    <div class="space-y-4">
                         <div class="flex items-start gap-4">
                             <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
-                                <i data-lucide="mail"></i>
+                                <i data-lucide="mail" class="w-5 h-5"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold">Email</h4>
-                                <p class="text-blue-100">info@training777.com</p>
+                                <h4 class="font-bold text-sm">Email</h4>
+                                <p class="text-blue-100 text-sm">hello@apomlab.com</p>
                             </div>
                         </div>
                         <div class="flex items-start gap-4">
                             <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
-                                <i data-lucide="map-pin"></i>
+                                <i data-lucide="map-pin" class="w-5 h-5"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold">Office Address</h4>
-                                <p class="text-blue-100">Soseaua Giurgiului 230, sector 4,<br>Bucuresti, Romania</p>
+                                <h4 class="font-bold text-sm">Office Address</h4>
+                                <p class="text-blue-100 text-sm">10 Anson road , international plaza , #46-15 , Singapore 079903</p>
                             </div>
                         </div>
                         <div class="flex items-start gap-4">
                             <div class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
-                                <i data-lucide="globe"></i>
+                                <i data-lucide="globe" class="w-5 h-5"></i>
                             </div>
                             <div>
-                                <h4 class="font-bold">Website</h4>
-                                <p class="text-blue-100">training777.com</p>
+                                <h4 class="font-bold text-sm">Website</h4>
+                                <p class="text-blue-100 text-sm">training777.com</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mt-12">
-                        <h4 class="font-bold mb-4">Follow Me</h4>
-                        <div class="flex gap-4">
-                            <a href="https://www.linkedin.com/in/gunther-hess-914725386/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-colors"><i data-lucide="linkedin"></i></a>
-                            <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-colors"><i data-lucide="twitter"></i></a>
-                            <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-colors"><i data-lucide="github"></i></a>
+                    <div class="mt-8">
+                        <h4 class="font-bold mb-3 text-sm">Follow Me</h4>
+                        <div class="flex gap-3">
+                            <a href="https://www.linkedin.com/in/gunther-erwin-hess-914725386/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-colors"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
+                            <a href="https://x.com/kingdomCEO777" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-secondary transition-colors"><i data-lucide="twitter" class="w-5 h-5"></i></a>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-white rounded-2xl p-8 shadow-2xl">
-                    <form id="contact-form" class="space-y-6">
-                        <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-2xl p-6 shadow-2xl">
+                    <form id="contact-form" class="space-y-4">
+                        <div class="grid md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-slate-700 text-sm font-bold mb-2">Name</label>
-                                <input type="text" name="name" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-secondary text-slate-900" placeholder="John Doe">
+                                <label class="block text-slate-700 text-xs font-bold mb-1.5">Name</label>
+                                <input type="text" name="name" required class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-secondary text-slate-900 text-sm" placeholder="John Doe">
                             </div>
                             <div>
-                                <label class="block text-slate-700 text-sm font-bold mb-2">Email</label>
-                                <input type="email" name="email" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-secondary text-slate-900" placeholder="john@example.com">
-                            </div>
-                        </div>
-
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-slate-700 text-sm font-bold mb-2">Contact Number</label>
-                                <input type="tel" name="contact" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-secondary text-slate-900" placeholder="+1 (555) 000-0000">
-                            </div>
-                            <div>
-                                <label class="block text-slate-700 text-sm font-bold mb-2">Company Name</label>
-                                <input type="text" name="company" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-secondary text-slate-900" placeholder="Company Ltd.">
+                                <label class="block text-slate-700 text-xs font-bold mb-1.5">Email</label>
+                                <input type="email" name="email" required class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-secondary text-slate-900 text-sm" placeholder="john@example.com">
                             </div>
                         </div>
 
-                        <div>
-                            <label class="block text-slate-700 text-sm font-bold mb-2">Country</label>
-                            <input type="text" name="country" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-secondary text-slate-900" placeholder="Your Country">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-slate-700 text-xs font-bold mb-1.5">Contact Number</label>
+                                <input type="tel" name="contact" required class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-secondary text-slate-900 text-sm" placeholder="+1 (555) 000-0000">
+                            </div>
+                            <div>
+                                <label class="block text-slate-700 text-xs font-bold mb-1.5">Company Name</label>
+                                <input type="text" name="company" required class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-secondary text-slate-900 text-sm" placeholder="Company Ltd.">
+                            </div>
                         </div>
 
                         <div>
-                            <label class="block text-slate-700 text-sm font-bold mb-4">I am interested in:</label>
-                            <div class="space-y-3">
+                            <label class="block text-slate-700 text-xs font-bold mb-1.5">Country</label>
+                            <input type="text" name="country" required class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-secondary text-slate-900 text-sm" placeholder="Your Country">
+                        </div>
+
+                        <div>
+                            <label class="block text-slate-700 text-xs font-bold mb-3">I am interested in:</label>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
                                 <label class="flex items-center gap-3 cursor-pointer group">
                                     <div class="relative flex items-center">
-                                        <input type="checkbox" name="interest" value="calibrate" id="check-calibrate" class="peer appearance-none w-6 h-6 border-2 border-slate-200 rounded checked:bg-secondary checked:border-secondary transition-all">
-                                        <i data-lucide="check" class="w-4 h-4 text-white absolute left-1 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"></i>
+                                        <input type="checkbox" name="interest" value="calibrate" id="check-calibrate" class="peer appearance-none w-5 h-5 border-2 border-slate-200 rounded checked:bg-secondary checked:border-secondary transition-all">
+                                        <i data-lucide="check" class="w-3 h-3 text-white absolute left-1 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"></i>
                                     </div>
-                                    <span class="text-slate-700 group-hover:text-primary transition-colors font-medium">CALIBRATE MY WORK FORCE</span>
+                                    <span class="text-slate-700 group-hover:text-primary transition-colors text-xs font-bold">CALIBRATE MY WORK FORCE</span>
                                 </label>
                                 <label class="flex items-center gap-3 cursor-pointer group">
                                     <div class="relative flex items-center">
-                                        <input type="checkbox" name="interest" value="deploy" id="check-deploy" class="peer appearance-none w-6 h-6 border-2 border-slate-200 rounded checked:bg-secondary checked:border-secondary transition-all">
-                                        <i data-lucide="check" class="w-4 h-4 text-white absolute left-1 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"></i>
+                                        <input type="checkbox" name="interest" value="deploy" id="check-deploy" class="peer appearance-none w-5 h-5 border-2 border-slate-200 rounded checked:bg-secondary checked:border-secondary transition-all">
+                                        <i data-lucide="check" class="w-3 h-3 text-white absolute left-1 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"></i>
                                     </div>
-                                    <span class="text-slate-700 group-hover:text-primary transition-colors font-medium">DEPLOY HDOS</span>
+                                    <span class="text-slate-700 group-hover:text-primary transition-colors text-xs font-bold">DEPLOY HDOS</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <div class="relative flex items-center">
+                                        <input type="checkbox" name="program" value="beginner" class="peer appearance-none w-5 h-5 border-2 border-slate-200 rounded checked:bg-secondary checked:border-secondary transition-all">
+                                        <i data-lucide="check" class="w-3 h-3 text-white absolute left-1 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"></i>
+                                    </div>
+                                    <span class="text-slate-700 group-hover:text-primary transition-colors text-xs font-bold uppercase">AI Beginner Orientation</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <div class="relative flex items-center">
+                                        <input type="checkbox" name="program" value="sales" class="peer appearance-none w-5 h-5 border-2 border-slate-200 rounded checked:bg-secondary checked:border-secondary transition-all">
+                                        <i data-lucide="check" class="w-3 h-3 text-white absolute left-1 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"></i>
+                                    </div>
+                                    <span class="text-slate-700 group-hover:text-primary transition-colors text-xs font-bold uppercase">2-Week AI Sales Program</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <div class="relative flex items-center">
+                                        <input type="checkbox" name="program" value="launchpad" class="peer appearance-none w-5 h-5 border-2 border-slate-200 rounded checked:bg-secondary checked:border-secondary transition-all">
+                                        <i data-lucide="check" class="w-3 h-3 text-white absolute left-1 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"></i>
+                                    </div>
+                                    <span class="text-slate-700 group-hover:text-primary transition-colors text-xs font-bold uppercase">6-Week AI Launchpad</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <div class="relative flex items-center">
+                                        <input type="checkbox" name="program" value="memory" class="peer appearance-none w-5 h-5 border-2 border-slate-200 rounded checked:bg-secondary checked:border-secondary transition-all">
+                                        <i data-lucide="check" class="w-3 h-3 text-white absolute left-1 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"></i>
+                                    </div>
+                                    <span class="text-slate-700 group-hover:text-primary transition-colors text-xs font-bold uppercase">AI Memory Masterclass</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <div class="relative flex items-center">
+                                        <input type="checkbox" name="program" value="corporate-ai-consulting" class="peer appearance-none w-5 h-5 border-2 border-slate-200 rounded checked:bg-secondary checked:border-secondary transition-all">
+                                        <i data-lucide="check" class="w-3 h-3 text-white absolute left-1 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"></i>
+                                    </div>
+                                    <span class="text-slate-700 group-hover:text-primary transition-colors text-xs font-bold uppercase">Corporate AI Consulting</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <div class="relative flex items-center">
+                                        <input type="checkbox" name="program" value="ai-business-blueprints" class="peer appearance-none w-5 h-5 border-2 border-slate-200 rounded checked:bg-secondary checked:border-secondary transition-all">
+                                        <i data-lucide="check" class="w-3 h-3 text-white absolute left-1 opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"></i>
+                                    </div>
+                                    <span class="text-slate-700 group-hover:text-primary transition-colors text-xs font-bold uppercase">AI Business Blueprints</span>
                                 </label>
                             </div>
                         </div>
 
                         <div>
-                            <label class="block text-slate-700 text-sm font-bold mb-2">Message</label>
-                            <textarea name="message" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-secondary text-slate-900 h-32" placeholder="How can I help you?"></textarea>
+                            <label class="block text-slate-700 text-xs font-bold mb-1.5">Message</label>
+                            <textarea name="message" class="w-full px-4 py-2.5 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-secondary text-slate-900 h-24 text-sm" placeholder="How can I help you?"></textarea>
                         </div>
-                        <button type="submit" class="w-full py-4 bg-primary text-white rounded-lg font-bold hover:bg-secondary transition-colors shadow-lg">
+                        <button type="submit" class="w-full py-3 bg-primary text-white rounded-lg font-bold hover:bg-secondary transition-colors shadow-lg text-sm">
                             Send Message
                         </button>
                     </form>
@@ -899,191 +1641,52 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-16 bg-slate-950 text-slate-400 border-t border-white/5">
+    <footer class="py-10 bg-slate-950 text-slate-400 border-t border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid md:grid-cols-3 gap-12 mb-12 border-b border-white/10 pb-12">
+            <div class="grid md:grid-cols-3 gap-8 mb-8 border-b border-white/10 pb-8">
                 <div>
-                    <h4 class="text-white font-bold uppercase tracking-widest text-xs mb-6">Certification Integrity</h4>
-                    <p class="text-sm leading-relaxed">Each level validates capability maturity through real operational impact verification.</p>
+                    <h4 class="text-white font-bold uppercase tracking-widest text-[10px] mb-4">Certification Integrity</h4>
+                    <p class="text-xs leading-relaxed">Each level validates capability maturity through real operational impact verification.</p>
                 </div>
                 <div>
-                    <h4 class="text-white font-bold uppercase tracking-widest text-xs mb-6">AI Readiness</h4>
-                    <p class="text-sm mb-4 leading-relaxed">Take the 2-minute diagnostic to audit your organization's AI maturity.</p>
-                    <button onclick="openReadinessCheck()" class="text-accent font-bold hover:text-white transition-colors flex items-center gap-2">
-                        Start Diagnostic <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                    </button>
+                    <h4 class="text-white font-bold uppercase tracking-widest text-[10px] mb-4">AI Readiness</h4>
+                    <p class="text-xs mb-3 leading-relaxed">Take the 2-minute diagnostic to audit your organization's AI maturity.</p>
+                    <a href="https://chatgpt.com/g/g-6985c596f3688191b63904a8df382163-ai-readiness-check-by-apo-mlab" target="_blank" rel="noopener noreferrer" class="text-accent font-bold hover:text-white transition-colors flex items-center gap-2 text-xs">
+                        Start Diagnostic <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                    </a>
                 </div>
                 <div class="md:text-right flex flex-col md:items-end justify-center">
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="text-3xl font-serif font-bold text-white">APO MLAB</span>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="text-2xl font-serif font-bold text-white">APO MLAB</span>
                     </div>
-                    <p class="text-sm">Human Capability Infrastructure</p>
+                    <p class="text-xs">Human Capability Infrastructure</p>
                 </div>
             </div>
             
-            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
-                <div class="text-sm">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-[10px]">
                     © 2026 Gunther Hess. All rights reserved.
                 </div>
-                <div class="text-sm">
+                <div class="text-[10px]">
                     Director: <span class="text-white">Günther Hess</span> | <a href="https://training777.com" class="hover:text-white underline decoration-secondary">training777.com</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- AI Readiness Modal -->
-    <div id="readiness-modal" class="fixed inset-0 z-[100] hidden">
-        <div class="absolute inset-0 bg-slate-900/90 backdrop-blur-sm" onclick="closeReadinessCheck()"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl bg-white rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-            <!-- Modal Header -->
-            <div class="p-8 border-b border-slate-100 flex justify-between items-center bg-primary text-white">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center">
-                        <i data-lucide="brain-circuit" class="w-6 h-6 text-accent"></i>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-serif font-bold">AI Readiness Check</h3>
-                        <p class="text-xs text-blue-200 uppercase tracking-widest">Powered by Gemini AI</p>
-                    </div>
-                </div>
-                <button onclick="closeReadinessCheck()" class="p-2 hover:bg-white/10 rounded-full transition-colors">
-                    <i data-lucide="x" class="w-6 h-6"></i>
-                </button>
-            </div>
-
-            <!-- Modal Content -->
-            <div id="readiness-content" class="flex-grow overflow-y-auto p-8 space-y-6 bg-slate-50">
-                <!-- Step 2: Chat Interface -->
-                <div id="chat-step" class="flex flex-col h-full space-y-4">
-                    <div id="chat-messages" class="space-y-4 min-h-[300px]">
-                        <div class="flex gap-3">
-                            <div class="w-8 h-8 bg-secondary rounded-lg flex items-center justify-center flex-shrink-0 text-white">
-                                <i data-lucide="bot" class="w-5 h-5"></i>
-                            </div>
-                            <div class="bg-white p-4 rounded-2xl rounded-tl-none shadow-sm border border-slate-100 text-slate-700 text-sm leading-relaxed">
-                                Hello! I am the APO MLAB AI Readiness Assistant. I will help you assess your organization's capability for AI adoption.
-                                <br><br>
-                                Let's start with a simple question: <span class="font-bold">What is your organization's primary objective for adopting AI?</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pt-4 border-t border-slate-100 flex gap-2">
-                        <input type="text" id="chat-input" placeholder="Type your response..." class="flex-grow px-6 py-3 rounded-xl border-2 border-slate-200 focus:border-secondary outline-none transition-all text-sm">
-                        <button id="send-btn" onclick="sendMessage()" class="p-3 bg-primary text-white rounded-xl hover:bg-secondary transition-all shadow-md">
-                            <i data-lucide="send" class="w-5 h-5"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Floating Sales Funnel Link -->
     <div class="fixed bottom-8 right-8 z-[60]">
-        <button onclick="openReadinessCheck()" class="flex items-center gap-3 bg-accent text-white px-6 py-4 rounded-full font-bold shadow-[0_10px_40px_rgba(237,137,54,0.5)] hover:bg-orange-600 transition-all hover:scale-105 group">
+        <a href="https://chatgpt.com/g/g-6985c596f3688191b63904a8df382163-ai-readiness-check-by-apo-mlab" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 bg-accent text-white px-6 py-4 rounded-full font-bold shadow-[0_10px_40px_rgba(237,137,54,0.5)] hover:bg-orange-600 transition-all hover:scale-105 group">
             <span class="relative flex h-3 w-3">
                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
                 <span class="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
             </span>
             Ready for AI?
             <i data-lucide="sparkles" class="w-4 h-4 opacity-70 group-hover:rotate-12 transition-transform"></i>
-        </button>
+        </a>
     </div>
 
     <script>
-        // AI Readiness Interactive Check
-        const apiKey = 'AIzaSyCNG7PSTwJCLYRoXoQodRScxZhzKfN6-yU'; 
-        const modal = document.getElementById('readiness-modal');
-        const chatStep = document.getElementById('chat-step');
-        const chatMessages = document.getElementById('chat-messages');
-        const chatInput = document.getElementById('chat-input');
-        const sendBtn = document.getElementById('send-btn');
-
-        function openReadinessCheck() {
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-            lucide.createIcons();
-        }
-
-        function closeReadinessCheck() {
-            modal.classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-
-        async function sendMessage() {
-            const content = chatInput.value.trim();
-            if (!content) return;
-
-            // Add user message to UI
-            appendMessage('user', content);
-            chatInput.value = '';
-            setLoading(true);
-
-            try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        contents: [{
-                            parts: [{
-                                text: `System Instructions: You are an AI Readiness Consultant for APO MLAB. Your goal is to assess the user's organization for AI readiness using the Human Capability Infrastructure framework. Be professional, direct, and insightful. Ask one question at a time to build a profile. After 3-4 questions, provide a summary of readiness and suggest "Calibrate Your Workforce" or "Deploy HDOS".\n\nUser Input: ${content}`
-                            }]
-                        }]
-                    })
-                });
-
-                const data = await response.json();
-                if (data.error) throw new Error(data.error.message);
-
-                const botResponse = data.candidates[0].content.parts[0].text;
-                appendMessage('bot', botResponse);
-            } catch (error) {
-                appendMessage('bot', `Error: ${error.message}. Please check your connection and API key.`);
-            } finally {
-                setLoading(false);
-            }
-        }
-
-        function appendMessage(role, text) {
-            const div = document.createElement('div');
-            div.className = 'flex gap-3 ' + (role === 'user' ? 'flex-row-reverse' : '');
-            
-            const icon = role === 'user' ? 'user' : 'bot';
-            const color = role === 'user' ? 'bg-accent' : 'bg-secondary';
-            const radius = role === 'user' ? 'rounded-tr-none' : 'rounded-tl-none';
-
-            div.innerHTML = `
-                <div class="w-8 h-8 ${color} rounded-lg flex items-center justify-center flex-shrink-0 text-white">
-                    <i data-lucide="${icon}" class="w-5 h-5"></i>
-                </div>
-                <div class="bg-white p-4 rounded-2xl ${radius} shadow-sm border border-slate-100 text-slate-700 text-sm leading-relaxed max-w-[80%]">
-                    ${text.replace(/\n/g, '<br>')}
-                </div>
-            `;
-            chatMessages.appendChild(div);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-            lucide.createIcons();
-        }
-
-        function setLoading(loading) {
-            sendBtn.disabled = loading;
-            chatInput.disabled = loading;
-            if (loading) {
-                sendBtn.innerHTML = '<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i>';
-            } else {
-                sendBtn.innerHTML = '<i data-lucide="send" class="w-5 h-5"></i>';
-            }
-            lucide.createIcons();
-        }
-
-        // Enter key to send
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendMessage();
-        });
-
         // Initialize Lucide icons
         lucide.createIcons();
 
@@ -1116,10 +1719,64 @@
             });
         });
 
-        // Simple form submission handling
-        document.getElementById('contact-form').addEventListener('submit', (e) => {
+        // Contact form submission via Netlify Forms
+        document.getElementById('contact-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            alert('Thank you for your message! This is a demo form.');
+            const form = e.target;
+            const btn = form.querySelector('button[type="submit"]');
+            const originalText = btn.textContent;
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+            try {
+                const data = new FormData(form);
+                await fetch('https://formspree.io/f/mwvnyovw', {
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json' },
+                    body: data
+                });
+                form.innerHTML = '<div class="text-center py-8"><div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4"><svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg></div><h3 class="text-lg font-serif font-bold text-primary mb-2">Message Sent!</h3><p class="text-sm text-slate-500">Thank you for reaching out. We will get back to you soon.</p></div>';
+            } catch (err) {
+                btn.textContent = originalText;
+                btn.disabled = false;
+                alert('Something went wrong. Please try again or email us directly.');
+            }
+        });
+
+        // FAQ Accordion functionality
+        const faqGroups = document.querySelectorAll('.faq-category-group');
+        
+        faqGroups.forEach(group => {
+            const toggle = group.querySelector('.faq-category-toggle');
+            const content = group.querySelector('.faq-category-content');
+            
+            // Remove 'hidden' class and use CSS for transitions
+            content.classList.remove('hidden');
+
+            const openGroup = () => {
+                group.classList.add('active');
+                toggle.setAttribute('aria-expanded', 'true');
+                content.setAttribute('aria-hidden', 'false');
+            };
+
+            const closeGroup = () => {
+                group.classList.remove('active');
+                toggle.setAttribute('aria-expanded', 'false');
+                content.setAttribute('aria-hidden', 'true');
+            };
+
+            // Hover interaction
+            group.addEventListener('mouseenter', openGroup);
+            group.addEventListener('mouseleave', closeGroup);
+
+            // Click interaction (toggles on click, useful for mobile)
+            toggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (group.classList.contains('active')) {
+                    closeGroup();
+                } else {
+                    openGroup();
+                }
+            });
         });
     </script>
 </body>

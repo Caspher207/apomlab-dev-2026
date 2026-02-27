@@ -1729,6 +1729,16 @@ style="transform: scale(1.2) translateY(-8%); transform-origin: center top;">
             btn.disabled = true;
             try {
                 const data = new FormData(form);
+                const checked = Array.from(form.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.name);
+                data.delete('Calibrate My Work Force');
+                data.delete('Deploy HDOS');
+                data.delete('AI Beginner Orientation');
+                data.delete('2-Week AI Sales Program');
+                data.delete('6-Week AI Launchpad');
+                data.delete('AI Memory Masterclass');
+                data.delete('Corporate AI Consulting');
+                data.delete('AI Business Blueprints');
+                data.append('Interested In', checked.length > 0 ? checked.join(', ') : 'None selected');
                 await fetch('https://formspree.io/f/mwvnyovw', {
                     method: 'POST',
                     headers: { 'Accept': 'application/json' },

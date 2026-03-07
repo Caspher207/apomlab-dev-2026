@@ -460,9 +460,8 @@
                     if (!isLocalhost) throw fetchErr; // re-throw only on live site
                 }
 
-                // Redirect to thank-you page
-                const planToUse = planName || formData.get('planName') || 'Selected Plan';
-                window.location.href = `thank-you.html?plan=${encodeURIComponent(planToUse)}&status=success`;
+                // Redirect to Stripe Checkout
+                window.location.href = 'https://buy.stripe.com/test_aFa5kD4AOajl3gE7D81ZS00';
 
             } catch (error) {
                 console.error('Signup error:', error);

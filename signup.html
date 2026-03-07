@@ -460,17 +460,31 @@
                     if (!isLocalhost) throw fetchErr; // re-throw only on live site
                 }
 
-                // Redirect based on plan level
+                // Redirect based on plan level + hub location
                 const planToUse = planName || formData.get('planName') || 'Selected Plan';
+                const hubToUse = (hubLocation || formData.get('hubLocation') || '').toLowerCase();
                 const planLower = planToUse.toLowerCase();
                 const isLevel1 = planLower.includes('ai-ready') || planLower.includes('ai ready');
                 const isLevel2 = planLower.includes('sop');
+
+                const stripeLinks = {
+                    level1: {
+                        malaysia:     'https://buy.stripe.com/test_cNi9AT2sG3UX5oM2iO1ZS02',
+                        singapore:    'https://buy.stripe.com/test_aFa5kD4AOajl3gE7D81ZS00',
+                        philippines:  'https://buy.stripe.com/test_aFa5kD4AOajl3gE7D81ZS00',
+                        default:      'https://buy.stripe.com/test_aFa5kD4AOajl3gE7D81ZS00',
+                    },
+                    level2: {
+                        default:      'https://buy.stripe.com/test_28E28rebo9fh5oM7D81ZS01',
+                    }
+                };
+
                 if (isLevel1) {
-                    // Level 1 — Stripe checkout
-                    window.location.href = 'https://buy.stripe.com/test_aFa5kD4AOajl3gE7D81ZS00';
+                    const link = stripeLinks.level1[hubToUse] || stripeLinks.level1.default;
+                    window.location.href = link;
                 } else if (isLevel2) {
-                    // Level 2 — Stripe checkout
-                    window.location.href = 'https://buy.stripe.com/test_28E28rebo9fh5oM7D81ZS01';
+                    const link = stripeLinks.level2[hubToUse] || stripeLinks.level2.default;
+                    window.location.href = link;
                 } else {
                     // Level 3 / other — thank-you page
                     window.location.href = `thank-you.html?plan=${encodeURIComponent(planToUse)}&status=success`;

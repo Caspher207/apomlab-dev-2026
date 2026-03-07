@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | APO MLAB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        primary: '#1a365d',
+                        secondary: '#2b6cb0',
+                        accent: '#ed8936',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
+        .section-padding { padding-top: 3.5rem; padding-bottom: 3.5rem; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans">
+    <!-- Global Operations Top Bar -->
+    <div class="bg-primary text-white py-2 hidden md:block">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center text-[10px] font-bold tracking-[0.2em] uppercase">
+            <span>Global Operations</span>
+            <div class="flex gap-8">
+                <span>Singapore (HQ)</span>
+                <span>Malaysia</span>
+                <span>Philippines</span>
+                <span>Rwanda</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <header class="glass sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-serif font-bold text-primary">APO MLAB</span>
+                        <span class="text-[10px] text-slate-500 font-medium uppercase tracking-wider">Human Capability Infrastructure</span>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="hover:text-secondary px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="singapore.html" class="hover:text-secondary px-3 py-2 text-sm font-medium">Singapore</a>
+                        <a href="malaysia.html" class="hover:text-secondary px-3 py-2 text-sm font-medium">Malaysia</a>
+                        <a href="philippines.html" class="hover:text-secondary px-3 py-2 text-sm font-medium">Philippines</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="section-padding bg-gradient-to-br from-primary to-secondary text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-serif font-bold mb-6">Complete Your Registration</h1>
+            <p class="text-xl text-blue-100 mb-8">Join APO MLAB's Human Capability Infrastructure program</p>
+        </div>
+    </section>
+
+    <!-- Signup Form Section -->
+    <section class="section-padding bg-white">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border-2 border-slate-100">
+                <!-- Plan Display -->
+                <div id="planDisplay" class="mb-8 p-6 bg-slate-50 rounded-xl hidden">
+                    <h3 class="text-lg font-bold text-primary mb-2">Selected Plan:</h3>
+                    <div id="planDetails" class="text-2xl font-bold text-secondary"></div>
+                </div>
+
+                <!-- Signup Form -->
+                <form id="signup-form" class="space-y-6">
+                    <!-- Hidden fields for plan info -->
+                    <input type="hidden" id="planName" name="planName">
+                    <input type="hidden" id="planPrice" name="planPrice">
+                    <input type="hidden" id="hubLocation" name="hubLocation">
+
+                    <!-- Personal Information -->
+                    <div>
+                        <h3 class="text-lg font-bold text-primary mb-4">Personal Information</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-slate-700 text-sm font-bold mb-2">Full Name *</label>
+                                <input type="text" name="name" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-secondary text-slate-900" placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label class="block text-slate-700 text-sm font-bold mb-2">Email Address *</label>
+                                <input type="email" name="email" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-secondary text-slate-900" placeholder="john@example.com">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div>
+                        <h3 class="text-lg font-bold text-primary mb-4">Contact Information</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-slate-700 text-sm font-bold mb-2">Phone Number *</label>
+                                <input type="tel" name="phone" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-secondary text-slate-900" placeholder="+65 1234 5678">
+                            </div>
+                            <div>
+                                <label class="block text-slate-700 text-sm font-bold mb-2">Country *</label>
+                                <select name="country" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-secondary text-slate-900">
+                                    <option value="">Select Country</option>
+                                    <option value="Singapore">Singapore</option>
+                                    <option value="Malaysia">Malaysia</option>
+                                    <option value="Philippines">Philippines</option>
+                                    <option value="Indonesia">Indonesia</option>
+                                    <option value="Vietnam">Vietnam</option>
+                                    <option value="Thailand">Thailand</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Company Information (Optional) -->
+                    <div>
+                        <h3 class="text-lg font-bold text-primary mb-4">Company Information (Optional)</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-slate-700 text-sm font-bold mb-2">Company Name</label>
+                                <input type="text" name="company" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-secondary text-slate-900" placeholder="Your Company Ltd">
+                            </div>
+                            <div>
+                                <label class="block text-slate-700 text-sm font-bold mb-2">Job Title</label>
+                                <input type="text" name="jobTitle" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-secondary text-slate-900" placeholder="CEO, Manager, etc.">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Terms and Conditions -->
+                    <div>
+                        <label class="flex items-start gap-3 cursor-pointer">
+                            <input type="checkbox" name="terms" required class="mt-1 appearance-none w-5 h-5 border-2 border-slate-200 rounded checked:bg-secondary checked:border-secondary">
+                            <span class="text-sm text-slate-600">
+                                I agree to the <a href="#" class="text-secondary hover:underline">Terms and Conditions</a> and <a href="#" class="text-secondary hover:underline">Privacy Policy</a>. I understand that this enrollment is subject to APO MLAB's review and acceptance.
+                            </span>
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="pt-4">
+                        <button type="submit" id="submitBtn" class="w-full py-4 bg-primary text-white text-center font-bold rounded-xl hover:bg-secondary transition-all shadow-lg text-lg">
+                            Proceed to Payment
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Loading State -->
+                <div id="loadingState" class="hidden text-center py-8">
+                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+                    <p class="mt-4 text-slate-600">Processing your registration...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-sm">&copy; 2026 APO MLAB. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Stripe (replace with your actual publishable key)
+        const stripe = Stripe('pk_test_51234567890abcdef'); // Replace with your actual Stripe publishable key
+
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const planName = urlParams.get('plan');
+        const planPrice = urlParams.get('price');
+        const hubLocation = urlParams.get('hub');
+
+        // Display plan information
+        if (planName && planPrice) {
+            document.getElementById('planDisplay').classList.remove('hidden');
+            document.getElementById('planDetails').innerHTML = `
+                <div class="flex justify-between items-center">
+                    <span>${planName}</span>
+                    <span class="text-2xl font-bold text-primary">${planPrice}</span>
+                </div>
+                ${hubLocation ? `<div class="text-sm text-slate-600 mt-2">Location: ${hubLocation}</div>` : ''}
+            `;
+            
+            // Set hidden fields
+            document.getElementById('planName').value = planName;
+            document.getElementById('planPrice').value = planPrice;
+            document.getElementById('hubLocation').value = hubLocation || 'Not specified';
+        }
+
+        // Handle form submission
+        document.getElementById('signup-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const form = e.target;
+            const submitBtn = document.getElementById('submitBtn');
+            const loadingState = document.getElementById('loadingState');
+            
+            // Show loading state
+            form.style.display = 'none';
+            loadingState.classList.remove('hidden');
+            
+            try {
+                // Collect form data
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData);
+                
+                // Send to Formspree
+                const formspreeResponse = await fetch('https://formspree.io/f/your-formspree-id', { // Replace with your actual Formspree ID
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (!formspreeResponse.ok) {
+                    throw new Error('Failed to submit registration');
+                }
+                
+                // Create Stripe checkout session (you'll need to implement this server-side)
+                // For now, we'll simulate the redirect
+                setTimeout(() => {
+                    // Redirect to Stripe (in production, this would be a real Stripe Checkout URL)
+                    window.location.href = `thank-you.html?plan=${encodeURIComponent(planName)}&status=success`;
+                }, 2000);
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('There was an error processing your registration. Please try again.');
+                
+                // Show form again
+                form.style.display = 'block';
+                loadingState.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

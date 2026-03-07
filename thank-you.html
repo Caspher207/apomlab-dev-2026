@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You | APO MLAB</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        primary: '#1a365d',
+                        secondary: '#2b6cb0',
+                        accent: '#ed8936',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
+        .section-padding { padding-top: 3.5rem; padding-bottom: 3.5rem; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans">
+    <!-- Navigation -->
+    <header class="glass sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-serif font-bold text-primary">APO MLAB</span>
+                        <span class="text-[10px] text-slate-500 font-medium uppercase tracking-wider">Human Capability Infrastructure</span>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="hover:text-secondary px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="singapore.html" class="hover:text-secondary px-3 py-2 text-sm font-medium">Singapore</a>
+                        <a href="malaysia.html" class="hover:text-secondary px-3 py-2 text-sm font-medium">Malaysia</a>
+                        <a href="philippines.html" class="hover:text-secondary px-3 py-2 text-sm font-medium">Philippines</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Thank You Section -->
+    <section class="section-padding bg-gradient-to-br from-primary to-secondary text-white min-h-screen flex items-center">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <!-- Success Icon -->
+            <div class="mb-8 float-animation">
+                <div class="w-24 h-24 bg-green-500 rounded-full flex items-center justify-center mx-auto shadow-2xl">
+                    <i data-lucide="check" class="w-12 h-12 text-white"></i>
+                </div>
+            </div>
+
+            <!-- Success Message -->
+            <h1 class="text-4xl md:text-5xl font-serif font-bold mb-6">Thank You!</h1>
+            <p class="text-xl text-blue-100 mb-8">Your registration has been successfully completed</p>
+
+            <!-- Plan Information -->
+            <div id="planInfo" class="mb-12 p-8 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
+                <h2 class="text-2xl font-bold mb-4">Your Enrollment Details</h2>
+                <div id="planDetails" class="space-y-2"></div>
+            </div>
+
+            <!-- Next Steps -->
+            <div class="grid md:grid-cols-3 gap-6 mb-12">
+                <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+                    <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="mail" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Check Your Email</h3>
+                    <p class="text-blue-100 text-sm">You'll receive a confirmation email with next steps within 24 hours</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+                    <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="calendar" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Schedule Onboarding</h3>
+                    <p class="text-blue-100 text-sm">We'll contact you to schedule your initial consultation session</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+                    <div class="w-12 h-12 bg-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="book-open" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Prepare Materials</h3>
+                    <p class="text-blue-100 text-sm">Review your business processes to maximize your first session</p>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 mb-8">
+                <h3 class="text-xl font-bold mb-4">Need Help?</h3>
+                <div class="grid md:grid-cols-2 gap-6 text-left">
+                    <div>
+                        <h4 class="font-bold mb-2">Contact Us</h4>
+                        <p class="text-blue-100">Email: hello@apomlab.com</p>
+                        <p class="text-blue-100">Phone: +65 1234 5678</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold mb-2">Office Hours</h4>
+                        <p class="text-blue-100">Monday - Friday: 9:00 AM - 6:00 PM (SGT)</p>
+                        <p class="text-blue-100">Saturday: 9:00 AM - 1:00 PM (SGT)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="index.html" class="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-xl hover:bg-blue-50 transition-all shadow-lg">
+                    <i data-lucide="home" class="w-5 h-5"></i>
+                    Back to Home
+                </a>
+                <a href="https://chatgpt.com/g/g-6985c596f3688191b63904a8df382163-ai-readiness-check-by-apo-mlab" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-8 py-4 bg-accent text-white font-bold rounded-xl hover:bg-orange-600 transition-all shadow-lg">
+                    <i data-lucide="brain-circuit" class="w-5 h-5"></i>
+                    Take AI Readiness Check
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-sm">&copy; 2026 APO MLAB. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const planName = urlParams.get('plan');
+        const status = urlParams.get('status');
+
+        // Display plan information
+        if (planName) {
+            document.getElementById('planDetails').innerHTML = `
+                <div class="flex justify-between items-center">
+                    <span class="text-lg">Program:</span>
+                    <span class="font-bold">${planName}</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-lg">Status:</span>
+                    <span class="font-bold text-green-300">Payment Completed</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-lg">Enrollment Date:</span>
+                    <span class="font-bold">${new Date().toLocaleDateString()}</span>
+                </div>
+            `;
+        }
+
+        // Track conversion (you can add Google Analytics or other tracking here)
+        if (status === 'success') {
+            console.log('Conversion tracked for:', planName);
+            // Add your tracking code here
+        }
+    </script>
+</body>
+</html>

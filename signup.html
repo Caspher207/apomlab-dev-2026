@@ -460,8 +460,16 @@
                     if (!isLocalhost) throw fetchErr; // re-throw only on live site
                 }
 
-                // Redirect to Stripe Checkout
-                window.location.href = 'https://buy.stripe.com/test_aFa5kD4AOajl3gE7D81ZS00';
+                // Redirect based on plan level
+                const planToUse = planName || formData.get('planName') || 'Selected Plan';
+                const isLevel1 = planToUse.toLowerCase().includes('ai-ready') || planToUse.toLowerCase().includes('ai ready');
+                if (isLevel1) {
+                    // Level 1 — go to Stripe checkout
+                    window.location.href = 'https://buy.stripe.com/test_aFa5kD4AOajl3gE7D81ZS00';
+                } else {
+                    // Level 2 / 3 — go to thank-you page
+                    window.location.href = `thank-you.html?plan=${encodeURIComponent(planToUse)}&status=success`;
+                }
 
             } catch (error) {
                 console.error('Signup error:', error);

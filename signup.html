@@ -420,6 +420,16 @@
             const submitBtn = document.getElementById('submitBtn');
             const loadingState = document.getElementById('loadingState');
             
+            // Validate required fields
+            const requiredFields = ['name', 'email', 'phone', 'country', 'terms'];
+            for (const field of requiredFields) {
+                const input = form[field];
+                if (!input || (!input.value && input.type !== 'checkbox') || (input.type === 'checkbox' && !input.checked)) {
+                    alert(`Please fill in all required fields: ${field}`);
+                    return;
+                }
+            }
+            
             // Show loading state
             form.style.display = 'none';
             loadingState.classList.remove('hidden');
@@ -446,11 +456,13 @@
                 // For now, we'll simulate the redirect
                 setTimeout(() => {
                     // Redirect to Stripe (in production, this would be a real Stripe Checkout URL)
-                    window.location.href = `thank-you.html?plan=${encodeURIComponent(planName)}&status=success`;
+                    const planToUse = planName || 'Selected Plan';
+                    window.location.href = `thank-you.html?plan=${encodeURIComponent(planToUse)}&status=success`;
                 }, 2000);
                 
             } catch (error) {
                 console.error('Error:', error);
+                console.error('Error details:', error.stack);
                 alert(`Error: ${error.message}. Please try again or contact support.`);
                 
                 // Show form again

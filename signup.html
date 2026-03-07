@@ -437,37 +437,31 @@
             try {
                 // Collect form data
                 const formData = new FormData(form);
-                
-                // Send to Formspree
-                const formspreeResponse = await fetch('https://formspree.io/f/xjgavzyo', {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                    },
-                    body: formData
-                });
-                
-                if (!formspreeResponse.ok) {
-                    const errorData = await formspreeResponse.json();
-                    throw new Error(errorData.error || 'Failed to submit registration');
+                const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
+                if (!isLocalhost) {
+                    // Send to Formspree only on live site (Formspree blocks localhost)
+                    const formspreeResponse = await fetch('https://formspree.io/f/xjgavzyo', {
+                        method: 'POST',
+                        headers: { 'Accept': 'application/json' },
+                        body: formData
+                    });
+                    if (!formspreeResponse.ok) {
+                        const errorData = await formspreeResponse.json().catch(() => ({}));
+                        throw new Error(errorData.error || 'Submission failed. Please try again.');
+                    }
                 }
-                
-                // Create Stripe checkout session (you'll need to implement this server-side)
-                // For now, we'll simulate the redirect
-                setTimeout(() => {
-                    // Redirect to Stripe (in production, this would be a real Stripe Checkout URL)
-                    const planToUse = planName || 'Selected Plan';
-                    window.location.href = `thank-you.html?plan=${encodeURIComponent(planToUse)}&status=success`;
-                }, 2000);
-                
+
+                // Redirect to thank-you page
+                const planToUse = planName || formData.get('planName') || 'Selected Plan';
+                window.location.href = `thank-you.html?plan=${encodeURIComponent(planToUse)}&status=success`;
+
             } catch (error) {
-                console.error('Error:', error);
-                console.error('Error details:', error.stack);
-                alert(`Error: ${error.message}. Please try again or contact support.`);
-                
+                console.error('Signup error:', error);
                 // Show form again
                 form.style.display = 'block';
                 loadingState.classList.add('hidden');
+                alert(error.message || 'Something went wrong. Please try again.');
             }
         });
     </script>

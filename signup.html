@@ -86,10 +86,12 @@
 
                 <!-- Signup Form -->
                 <form id="signup-form" class="space-y-6">
-                    <!-- Hidden fields for plan info -->
+                    <!-- Hidden fields for plan info and Formspree routing -->
                     <input type="hidden" id="planName" name="planName">
                     <input type="hidden" id="planPrice" name="planPrice">
                     <input type="hidden" id="hubLocation" name="hubLocation">
+                    <input type="hidden" name="_subject" id="formSubject" value="New APO MLAB Signup">
+                    <input type="hidden" name="_replyto" id="replyTo">
 
                     <!-- Personal Information -->
                     <div>
@@ -435,12 +437,14 @@
             loadingState.classList.remove('hidden');
             
             try {
-                // Collect form data
-                const formData = new FormData(form);
-                const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+                // Sync email to _replyto so Formspree knows the sender
+                document.getElementById('replyTo').value = form.email.value;
+                document.getElementById('formSubject').value = `New APO MLAB Signup — ${form.planName.value || 'General Enquiry'}`;
 
-                if (!isLocalhost) {
-                    // Send to Formspree only on live site (Formspree blocks localhost)
+                const formData = new FormData(form);
+
+                // Always try Formspree; on localhost it will fail silently (CORS), on live it sends email
+                try {
                     const formspreeResponse = await fetch('https://formspree.io/f/xjgavzyo', {
                         method: 'POST',
                         headers: { 'Accept': 'application/json' },
@@ -450,6 +454,10 @@
                         const errorData = await formspreeResponse.json().catch(() => ({}));
                         throw new Error(errorData.error || 'Submission failed. Please try again.');
                     }
+                } catch (fetchErr) {
+                    // On localhost, Formspree blocks the request — ignore silently
+                    const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+                    if (!isLocalhost) throw fetchErr; // re-throw only on live site
                 }
 
                 // Redirect to thank-you page
@@ -458,7 +466,6 @@
 
             } catch (error) {
                 console.error('Signup error:', error);
-                // Show form again
                 form.style.display = 'block';
                 loadingState.classList.add('hidden');
                 alert(error.message || 'Something went wrong. Please try again.');

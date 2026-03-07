@@ -462,12 +462,17 @@
 
                 // Redirect based on plan level
                 const planToUse = planName || formData.get('planName') || 'Selected Plan';
-                const isLevel1 = planToUse.toLowerCase().includes('ai-ready') || planToUse.toLowerCase().includes('ai ready');
+                const planLower = planToUse.toLowerCase();
+                const isLevel1 = planLower.includes('ai-ready') || planLower.includes('ai ready');
+                const isLevel2 = planLower.includes('sop');
                 if (isLevel1) {
-                    // Level 1 — go to Stripe checkout
+                    // Level 1 — Stripe checkout
                     window.location.href = 'https://buy.stripe.com/test_aFa5kD4AOajl3gE7D81ZS00';
+                } else if (isLevel2) {
+                    // Level 2 — Stripe checkout
+                    window.location.href = 'https://buy.stripe.com/test_28E28rebo9fh5oM7D81ZS01';
                 } else {
-                    // Level 2 / 3 — go to thank-you page
+                    // Level 3 / other — thank-you page
                     window.location.href = `thank-you.html?plan=${encodeURIComponent(planToUse)}&status=success`;
                 }
 

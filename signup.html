@@ -413,6 +413,7 @@
 
         // Mount Stripe card element with custom styling
         const cardElement = elements.create('card', {
+            hidePostalCode: true,
             style: {
                 base: {
                     fontSize: '16px',
@@ -551,9 +552,10 @@
                     return;
                 }
 
-                // Append prefilled email to Stripe link for smoother checkout
+                // Append prefilled email and success redirect to Stripe link
                 const email = encodeURIComponent(form.email.value);
-                window.location.href = `${baseLink}?prefilled_email=${email}`;
+                const successUrl = encodeURIComponent(`${window.location.origin}/thank-you.html?plan=${encodeURIComponent(planToUse)}&status=success`);
+                window.location.href = `${baseLink}?prefilled_email=${email}&success_url=${successUrl}`;
 
             } catch (error) {
                 console.error('Signup error:', error);

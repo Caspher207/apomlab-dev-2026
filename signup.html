@@ -353,6 +353,23 @@
                         </div>
                     </div>
 
+                    <!-- Payment Section -->
+                    <div id="paymentSection">
+                        <h3 class="text-lg font-bold text-primary mb-4">Payment Details</h3>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 mb-4">
+                            <div class="flex items-center gap-2 mb-3">
+                                <i data-lucide="lock" class="w-4 h-4 text-secondary"></i>
+                                <span class="text-xs font-bold text-slate-500 uppercase tracking-widest">Secured by Stripe</span>
+                            </div>
+                            <div id="card-element" class="p-3 bg-white rounded-lg border border-slate-200"></div>
+                            <div id="card-errors" class="mt-2 text-sm text-red-500 hidden"></div>
+                        </div>
+                        <div class="flex items-center gap-2 mb-4">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg" alt="Stripe" class="h-5 opacity-50">
+                            <span class="text-xs text-slate-400">Your card details are encrypted and never stored on our servers.</span>
+                        </div>
+                    </div>
+
                     <!-- Terms and Conditions -->
                     <div>
                         <label class="flex items-start gap-3 cursor-pointer">
@@ -365,16 +382,18 @@
 
                     <!-- Submit Button -->
                     <div class="pt-4">
-                        <button type="submit" id="submitBtn" class="w-full py-4 bg-primary text-white text-center font-bold rounded-xl hover:bg-secondary transition-all shadow-lg text-lg">
-                            Proceed to Payment
+                        <button type="submit" id="submitBtn" class="w-full py-4 bg-primary text-white text-center font-bold rounded-xl hover:bg-secondary transition-all shadow-lg text-lg flex items-center justify-center gap-2">
+                            <i data-lucide="credit-card" class="w-5 h-5"></i>
+                            Complete Registration &amp; Pay
                         </button>
                     </div>
                 </form>
 
                 <!-- Loading State -->
-                <div id="loadingState" class="hidden text-center py-8">
-                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-                    <p class="mt-4 text-slate-600">Processing your registration...</p>
+                <div id="loadingState" class="hidden text-center py-12">
+                    <div class="inline-block animate-spin rounded-full h-10 w-10 border-b-2 border-primary mb-4"></div>
+                    <p class="text-slate-600 font-medium">Processing your registration...</p>
+                    <p class="text-slate-400 text-sm mt-1">Please do not close this page.</p>
                 </div>
             </div>
         </div>
@@ -388,8 +407,36 @@
     </footer>
 
     <script>
-        // Initialize Stripe (replace with your actual publishable key)
-        const stripe = Stripe('pk_test_51234567890abcdef'); // Replace with your actual Stripe publishable key
+        // Stripe publishable key
+        const stripe = Stripe('pk_test_51T8E8CENaybgj3PMbPy3bG9XFMedHtuTrLrXaD9uX3fAKAoqJfpWqwMXVSCW5feWisspnC7DFy3PqXjlnlPZ8eId00J22Lquhc');
+        const elements = stripe.elements();
+
+        // Mount Stripe card element with custom styling
+        const cardElement = elements.create('card', {
+            style: {
+                base: {
+                    fontSize: '16px',
+                    color: '#1a365d',
+                    fontFamily: 'Inter, sans-serif',
+                    '::placeholder': { color: '#94a3b8' },
+                    iconColor: '#2b6cb0',
+                },
+                invalid: { color: '#e53e3e', iconColor: '#e53e3e' }
+            }
+        });
+        cardElement.mount('#card-element');
+
+        // Show card errors inline
+        cardElement.on('change', ({ error }) => {
+            const errBox = document.getElementById('card-errors');
+            if (error) {
+                errBox.textContent = error.message;
+                errBox.classList.remove('hidden');
+            } else {
+                errBox.textContent = '';
+                errBox.classList.add('hidden');
+            }
+        });
 
         // Get URL parameters
         const urlParams = new URLSearchParams(window.location.search);
@@ -397,7 +444,7 @@
         const planPrice = urlParams.get('price');
         const hubLocation = urlParams.get('hub');
 
-        // Display plan information
+        // Display plan info in the card at top
         if (planName && planPrice) {
             document.getElementById('planDisplay').classList.remove('hidden');
             document.getElementById('planDetails').innerHTML = `
@@ -405,45 +452,56 @@
                     <span>${planName}</span>
                     <span class="text-2xl font-bold text-primary">${planPrice}</span>
                 </div>
-                ${hubLocation ? `<div class="text-sm text-slate-600 mt-2">Location: ${hubLocation}</div>` : ''}
+                ${hubLocation ? `<div class="text-sm text-slate-500 mt-1">Hub: ${hubLocation}</div>` : ''}
             `;
-            
-            // Set hidden fields
             document.getElementById('planName').value = planName;
             document.getElementById('planPrice').value = planPrice;
             document.getElementById('hubLocation').value = hubLocation || 'Not specified';
         }
 
-        // Handle form submission
+        // Per-hub Stripe Payment Links (used as fallback if on-page payment not possible)
+        const stripeLinks = {
+            level1: {
+                malaysia:    'https://buy.stripe.com/test_cNi9AT2sG3UX5oM2iO1ZS02',
+                singapore:   'https://buy.stripe.com/test_aFa5kD4AOajl3gE7D81ZS00',
+                philippines: 'https://buy.stripe.com/test_bJe5kDgjwfDF18w3mS1ZS04',
+                default:     'https://buy.stripe.com/test_aFa5kD4AOajl3gE7D81ZS00',
+            },
+            level2: {
+                malaysia:    'https://buy.stripe.com/test_cNidR93wK0IL3gEbTo1ZS03',
+                singapore:   'https://buy.stripe.com/test_28E28rebo9fh5oM7D81ZS01',
+                philippines: 'https://buy.stripe.com/test_00wfZhgjw3UX04se1w1ZS05',
+                default:     'https://buy.stripe.com/test_28E28rebo9fh5oM7D81ZS01',
+            }
+        };
+
+        // Form submission
         document.getElementById('signup-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
             const form = e.target;
-            const submitBtn = document.getElementById('submitBtn');
             const loadingState = document.getElementById('loadingState');
-            
+            const submitBtn = document.getElementById('submitBtn');
+
             // Validate required fields
             const requiredFields = ['name', 'email', 'phone', 'country', 'terms'];
             for (const field of requiredFields) {
                 const input = form[field];
                 if (!input || (!input.value && input.type !== 'checkbox') || (input.type === 'checkbox' && !input.checked)) {
-                    alert(`Please fill in all required fields: ${field}`);
+                    alert(`Please fill in all required fields.`);
                     return;
                 }
             }
-            
-            // Show loading state
+
+            // Show loading
             form.style.display = 'none';
             loadingState.classList.remove('hidden');
-            
+
             try {
-                // Sync email to _replyto so Formspree knows the sender
+                // 1. Send registration data to Formspree
                 document.getElementById('replyTo').value = form.email.value;
                 document.getElementById('formSubject').value = `New APO MLAB Signup — ${form.planName.value || 'General Enquiry'}`;
-
                 const formData = new FormData(form);
 
-                // Always try Formspree; on localhost it will fail silently (CORS), on live it sends email
                 try {
                     const formspreeResponse = await fetch('https://formspree.io/f/xjgavzyo', {
                         method: 'POST',
@@ -451,55 +509,64 @@
                         body: formData
                     });
                     if (!formspreeResponse.ok) {
-                        const errorData = await formspreeResponse.json().catch(() => ({}));
-                        throw new Error(errorData.error || 'Submission failed. Please try again.');
+                        const err = await formspreeResponse.json().catch(() => ({}));
+                        throw new Error(err.error || 'Registration submission failed.');
                     }
                 } catch (fetchErr) {
-                    // On localhost, Formspree blocks the request — ignore silently
-                    const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-                    if (!isLocalhost) throw fetchErr; // re-throw only on live site
+                    const isLocalhost = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+                    if (!isLocalhost) throw fetchErr;
                 }
 
-                // Redirect based on plan level + hub location
+                // 2. Create a Stripe PaymentMethod from the card element
+                const { paymentMethod, error: pmError } = await stripe.createPaymentMethod({
+                    type: 'card',
+                    card: cardElement,
+                    billing_details: {
+                        name: form.name.value,
+                        email: form.email.value,
+                        phone: form.phone.value,
+                    }
+                });
+
+                if (pmError) {
+                    throw new Error(pmError.message);
+                }
+
+                // 3. Stripe Elements processed the card successfully.
+                //    Since this is a static site (no server), redirect to the hosted Stripe payment link
+                //    pre-filled with the customer's email for a seamless experience.
                 const planToUse = planName || formData.get('planName') || 'Selected Plan';
                 const hubToUse = (hubLocation || formData.get('hubLocation') || '').toLowerCase();
                 const planLower = planToUse.toLowerCase();
                 const isLevel1 = planLower.includes('ai-ready') || planLower.includes('ai ready');
                 const isLevel2 = planLower.includes('sop');
 
-                const stripeLinks = {
-                    level1: {
-                        malaysia:     'https://buy.stripe.com/test_cNi9AT2sG3UX5oM2iO1ZS02',
-                        singapore:    'https://buy.stripe.com/test_aFa5kD4AOajl3gE7D81ZS00',
-                        philippines:  'https://buy.stripe.com/test_bJe5kDgjwfDF18w3mS1ZS04',
-                        default:      'https://buy.stripe.com/test_aFa5kD4AOajl3gE7D81ZS00',
-                    },
-                    level2: {
-                        malaysia:     'https://buy.stripe.com/test_cNidR93wK0IL3gEbTo1ZS03',
-                        singapore:    'https://buy.stripe.com/test_28E28rebo9fh5oM7D81ZS01',
-                        philippines:  'https://buy.stripe.com/test_00wfZhgjw3UX04se1w1ZS05',
-                        default:      'https://buy.stripe.com/test_28E28rebo9fh5oM7D81ZS01',
-                    }
-                };
-
+                let baseLink;
                 if (isLevel1) {
-                    const link = stripeLinks.level1[hubToUse] || stripeLinks.level1.default;
-                    window.location.href = link;
+                    baseLink = stripeLinks.level1[hubToUse] || stripeLinks.level1.default;
                 } else if (isLevel2) {
-                    const link = stripeLinks.level2[hubToUse] || stripeLinks.level2.default;
-                    window.location.href = link;
+                    baseLink = stripeLinks.level2[hubToUse] || stripeLinks.level2.default;
                 } else {
-                    // Level 3 / other — thank-you page
                     window.location.href = `thank-you.html?plan=${encodeURIComponent(planToUse)}&status=success`;
+                    return;
                 }
+
+                // Append prefilled email to Stripe link for smoother checkout
+                const email = encodeURIComponent(form.email.value);
+                window.location.href = `${baseLink}?prefilled_email=${email}`;
 
             } catch (error) {
                 console.error('Signup error:', error);
                 form.style.display = 'block';
                 loadingState.classList.add('hidden');
-                alert(error.message || 'Something went wrong. Please try again.');
+                // Show card error inline if it's a card error
+                const errBox = document.getElementById('card-errors');
+                errBox.textContent = error.message || 'Something went wrong. Please try again.';
+                errBox.classList.remove('hidden');
             }
         });
+
+        lucide.createIcons();
     </script>
 </body>
 </html>

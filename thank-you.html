@@ -152,6 +152,8 @@
         const urlParams = new URLSearchParams(window.location.search);
         const planName = urlParams.get('plan');
         const status = urlParams.get('status');
+        const emailParam = urlParams.get('prefilled_email') || urlParams.get('email') || '';
+        const stripeSessionId = urlParams.get('session_id') || '';
 
         // Display enrollment details — show generic confirmation if no plan param (e.g. direct Stripe redirect)
         const displayPlan = planName || 'APO MLAB Program';
@@ -169,6 +171,18 @@
                 <span class="font-bold">${new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
             </div>
         `;
+
+        // Log payment success to Google Sheets
+        const sheetsEndpoint = 'https://script.google.com/macros/s/AKfycbyqQ4sRXKRooDDTuYlrfm-pmxYPzJzqOSPMaVq758BiC_TVh48SVNOq-LcMwvfU4Ewo/exec';
+        fetch(sheetsEndpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain' },
+            body: JSON.stringify({
+                type: 'payment_success',
+                email: emailParam,
+                stripePaymentId: stripeSessionId,
+            })
+        }).catch(() => {}); // Silently ignore if logging fails
     </script>
 </body>
 </html>

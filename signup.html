@@ -518,6 +518,21 @@
                     if (!isLocalhost) throw fetchErr;
                 }
 
+                // Log registration to Google Sheets
+                const sheetsEndpoint = 'https://script.google.com/macros/s/AKfycbyqQ4sRXKRooDDTuYlrfm-pmxYPzJzqOSPMaVq758BiC_TVh48SVNOq-LcMwvfU4Ewo/exec';
+                fetch(sheetsEndpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({
+                        type: 'registration',
+                        name: form.name.value,
+                        email: form.email.value,
+                        phone: form.phone.value,
+                        country: form.country.value,
+                        plan: form.planName.value || planName || 'Not specified',
+                    })
+                }).catch(() => {}); // Silently ignore if Sheets logging fails
+
                 // 2. Create a Stripe PaymentMethod from the card element
                 const { paymentMethod, error: pmError } = await stripe.createPaymentMethod({
                     type: 'card',

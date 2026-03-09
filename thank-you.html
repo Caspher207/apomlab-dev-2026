@@ -148,34 +148,27 @@
             lucide.createIcons();
         });
 
-        // Get URL parameters
+        // Get URL parameters — works whether coming from signup.html or Stripe redirect
         const urlParams = new URLSearchParams(window.location.search);
         const planName = urlParams.get('plan');
         const status = urlParams.get('status');
 
-        // Display plan information
-        if (planName) {
-            document.getElementById('planDetails').innerHTML = `
-                <div class="flex justify-between items-center">
-                    <span class="text-lg">Program:</span>
-                    <span class="font-bold">${planName}</span>
-                </div>
-                <div class="flex justify-between items-center">
-                    <span class="text-lg">Status:</span>
-                    <span class="font-bold text-green-300">Payment Completed</span>
-                </div>
-                <div class="flex justify-between items-center">
-                    <span class="text-lg">Enrollment Date:</span>
-                    <span class="font-bold">${new Date().toLocaleDateString()}</span>
-                </div>
-            `;
-        }
-
-        // Track conversion (you can add Google Analytics or other tracking here)
-        if (status === 'success') {
-            console.log('Conversion tracked for:', planName);
-            // Add your tracking code here
-        }
+        // Display enrollment details — show generic confirmation if no plan param (e.g. direct Stripe redirect)
+        const displayPlan = planName || 'APO MLAB Program';
+        document.getElementById('planDetails').innerHTML = `
+            <div class="flex justify-between items-center">
+                <span class="text-lg">Program:</span>
+                <span class="font-bold">${displayPlan}</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-lg">Status:</span>
+                <span class="font-bold text-green-300">✓ Payment Completed</span>
+            </div>
+            <div class="flex justify-between items-center">
+                <span class="text-lg">Enrollment Date:</span>
+                <span class="font-bold">${new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+            </div>
+        `;
     </script>
 </body>
 </html>

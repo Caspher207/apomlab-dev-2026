@@ -520,6 +520,11 @@
 
                 // Log registration to Google Sheets
                 const sheetsEndpoint = 'https://script.google.com/macros/s/AKfycbzjXKyBhtPvB4t1MxEeKeHEU5n8kh061du_hFVaBBgbuMt9MzpTX3ZxIPIZzby6ejir/exec';
+                const rawPlan = form.planName.value || planName || '';
+                const rawPlanLower = rawPlan.toLowerCase();
+                const planLabel = rawPlanLower.includes('ai-ready') || rawPlanLower.includes('ai ready') ? 'Level 1 — AI-Ready Operations'
+                                : rawPlanLower.includes('sop') ? 'Level 2 — SOP Implementation'
+                                : rawPlan || 'Not specified';
                 fetch(sheetsEndpoint, {
                     method: 'POST',
                     headers: { 'Content-Type': 'text/plain' },
@@ -529,7 +534,7 @@
                         email: form.email.value,
                         phone: form.phone.value,
                         country: form.country.value,
-                        plan: form.planName.value || planName || 'Not specified',
+                        plan: planLabel,
                     })
                 }).catch(() => {}); // Silently ignore if Sheets logging fails
 

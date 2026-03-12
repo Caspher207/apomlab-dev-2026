@@ -148,15 +148,19 @@
             lucide.createIcons();
         });
 
-        // Get URL parameters — works whether coming from signup.html or Stripe redirect
+        // Get URL parameters
         const urlParams = new URLSearchParams(window.location.search);
-        const planName = urlParams.get('plan');
-        const status = urlParams.get('status');
-        const emailParam = urlParams.get('prefilled_email') || urlParams.get('email') || '';
+        const planNameParam = urlParams.get('plan');
         const stripeSessionId = urlParams.get('session_id') || '';
 
-        // Display enrollment details — show generic confirmation if no plan param (e.g. direct Stripe redirect)
-        const displayPlan = planName || 'APO MLAB Program';
+        // Read email + plan from sessionStorage (set by signup.html before Stripe redirect)
+        const storedEmail = sessionStorage.getItem('apo_email') || '';
+        const storedPlan  = sessionStorage.getItem('apo_plan')  || '';
+        sessionStorage.removeItem('apo_email');
+        sessionStorage.removeItem('apo_plan');
+
+        const displayPlan = planNameParam || storedPlan || 'APO MLAB Program';
+
         document.getElementById('planDetails').innerHTML = `
             <div class="flex justify-between items-center">
                 <span class="text-lg">Program:</span>
@@ -172,17 +176,19 @@
             </div>
         `;
 
-        // Log payment success to Google Sheets
+        // Log payment success to Google Sheets using stored email
         const sheetsEndpoint = 'https://script.google.com/macros/s/AKfycbzjXKyBhtPvB4t1MxEeKeHEU5n8kh061du_hFVaBBgbuMt9MzpTX3ZxIPIZzby6ejir/exec';
-        fetch(sheetsEndpoint, {
-            method: 'POST',
-            headers: { 'Content-Type': 'text/plain' },
-            body: JSON.stringify({
-                type: 'payment_success',
-                email: emailParam,
-                stripePaymentId: stripeSessionId,
-            })
-        }).catch(() => {}); // Silently ignore if logging fails
+        if (storedEmail) {
+            fetch(sheetsEndpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain' },
+                body: JSON.stringify({
+                    type: 'payment_success',
+                    email: storedEmail,
+                    stripePaymentId: stripeSessionId || 'Stripe Payment Link',
+                })
+            }).catch(() => {});
+        }
     </script>
 </body>
 </html>

@@ -567,6 +567,10 @@
                     return;
                 }
 
+                // Store registration data in sessionStorage so thank-you.html can log payment success
+                sessionStorage.setItem('apo_email', form.email.value);
+                sessionStorage.setItem('apo_plan', planToUse);
+
                 // Append prefilled email and success redirect to Stripe link
                 const email = encodeURIComponent(form.email.value);
                 const successUrl = encodeURIComponent(`${window.location.origin}/thank-you.html?plan=${encodeURIComponent(planToUse)}&status=success`);
